@@ -1,11 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
-import Tabs from './src/components/Tabs';
+import LoginScreen from './src/screens/LoginScreen';
 
 const App = () => {
     return (
-        <NavigationContainer>
-            <Tabs />
-        </NavigationContainer>
+        // <NavigationContainer>
+        //     <Tabs />
+        // </NavigationContainer>
+        <>
+        <LoginScreen/>
+        </>
     )
 }
+
 export default App

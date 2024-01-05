@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { appTheme } from "../colors";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, View, StyleSheet, TextInput, Text, TouchableOpacity } from "react-native";
+import { Image, View, StyleSheet, TextInput, Text, TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
 
 const LoginScreen = () => {
     const [email, setEmail] = useState("");
@@ -9,9 +9,8 @@ const LoginScreen = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <View style={{ width: "100%", paddingTop: 50, height: "100%", padding: 20 }}>
-
-            <TouchableOpacity>
+        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: 'white', flex: 1 }}>
+            <TouchableOpacity style={{ paddingTop: 15 }}>
                 <Ionicons name="arrow-back" size={24} color="black" />
             </TouchableOpacity>
 
@@ -38,7 +37,7 @@ const LoginScreen = () => {
             <Text style={styles.plainText}> Forgot Password? </Text>
             <Text style={styles.plainText}> Don't have an account?  <Text style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign Up</Text> </Text>
 
-        </View>
+        </SafeAreaView>
     );
 };
 
