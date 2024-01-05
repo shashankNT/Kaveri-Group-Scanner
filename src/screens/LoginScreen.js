@@ -8,11 +8,6 @@ const LoginScreen = () => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleHidePassword = () => {
-        setShowPassword(!showPassword);
-    }
-
-
     return (
         <View style={{ width: "100%", paddingTop: 50, height: "100%", padding: 20 }}>
 
@@ -31,8 +26,8 @@ const LoginScreen = () => {
             <View style={styles.textInputContainer}>
                 <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" onChangeText={() => setPassword(password)} secureTextEntry={!showPassword} />
                 {showPassword
-                    ? <Ionicons onPress={handleHidePassword} style={styles.hidePassword} name="eye" size={24} />
-                    : <Ionicons onPress={handleHidePassword} style={styles.hidePassword} name="eye-off" size={24} />
+                    ? <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye" size={24} />
+                    : <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye-off" size={24} />
                 }
             </View>
 
