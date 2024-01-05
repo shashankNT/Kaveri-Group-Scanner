@@ -22,9 +22,9 @@ const LoginScreen = () => {
             <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginVertical: "15%" }} > Sign In </Text>
 
 
-            <TextInput style={styles.textInputContainer} placeholder="Your Email" onChangeText={() => setEmail(email)} />
+            <TextInput style={styles.textInputContainer} placeholder="Your Email" selectionColor={appTheme.primaryColor} onChangeText={() => setEmail(email)} />
             <View style={styles.textInputContainer}>
-                <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" onChangeText={() => setPassword(password)} secureTextEntry={!showPassword} />
+                <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={() => setPassword(password)} secureTextEntry={!showPassword} />
                 {showPassword
                     ? <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye" size={24} />
                     : <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye-off" size={24} />

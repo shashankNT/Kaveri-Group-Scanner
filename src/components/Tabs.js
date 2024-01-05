@@ -19,11 +19,11 @@ const Tabs = () => {
                     inactiveTintColor: 'gray'
                 }}
             >
-                {/* <Tab.Screen
+                <Tab.Screen
                     name="Home"
                     component={HomeScreen}
                     options={{ tabBarIcon: ({ color, size }) => <Entypo name="home" size={size} color={color} /> }}
-                /> */}
+                />
 
                 <Tab.Screen
                     name="Offers"
