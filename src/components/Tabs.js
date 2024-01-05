@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import OffersScreen from '../screens/OffersScreen';
@@ -24,7 +23,8 @@ const Tabs = () => {
                     name="Home"
                     component={HomeScreen}
                     options={{ tabBarIcon: ({ color, size }) => <Entypo name="home" size={size} color={color} /> }}
-                />
+                /> */}
+
                 <Tab.Screen
                     name="Offers"
                     component={OffersScreen}
@@ -35,7 +35,8 @@ const Tabs = () => {
                             <MaterialIcons name="local-offer" size={size} color={color} />
                         ),
                     }}
-                /> */}
+                />
+
                 <Tab.Screen
                     name="Profile"
                     component={ProfileScreen}
