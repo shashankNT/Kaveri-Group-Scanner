@@ -15,10 +15,10 @@ const Tabs = ({ navigationStack, route }) => {
     return (
 
         <Tab.Navigator
-            // tabBarOptions={{
-            //     activeTintColor: appTheme.primaryColor,
-            //     inactiveTintColor: 'gray'
-            // }}
+            screenOptions={{
+                tabBarActiveTintColor: appTheme.primaryColor,
+                tabBarInactiveTintColor: 'gray',
+            }}
         >
             <Tab.Screen
                 name="Home"
