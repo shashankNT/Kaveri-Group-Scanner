@@ -9,11 +9,6 @@ const ScannerScreen = ({ navigation }) => {
 
     useEffect(() => {
         (async () => {
-            if (Platform.OS === 'web') {
-                setHasPermission(true);
-                return;
-            }
-
             const { status } = await BarCodeScanner.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
@@ -21,15 +16,13 @@ const ScannerScreen = ({ navigation }) => {
 
     useEffect(() => {
         if (scannedData.data !== null)
-            navigation.navigate('ScannerSummaryScreen');
+            navigation.navigate('ScannerSummaryScreen', { lotNumber: scannedData.data });
     }, [scannedData])
 
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
         setScannedData({ type, data });
     };
-
-
 
     if (hasPermission === null) {
         return <Text>Requesting camera permission</Text>;
@@ -51,16 +44,14 @@ const ScannerScreen = ({ navigation }) => {
                 {scanned && (
                     <View>
                         <Text>Data: {scannedData?.data}</Text>
-                        {/* <Button
-                            title={'Tap to Scan Again'}
-                            onPress={() => {
-                                setScanned(false);
-                                setScannedData(null);
-                            }}
-                        /> */}
                     </View>
                 )}
             </View>
+            {/* <Button
+                title="Press me"
+                // color={appTheme}
+                onPress={() => Alert.alert('Button with adjusted color pressed')}
+            /> */}
         </SafeAreaView>
     );
 };

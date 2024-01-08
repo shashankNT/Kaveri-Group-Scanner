@@ -1,17 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
-import ScannerScreen from './src/screens/ScannerScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import Tabs from './src/components/Tabs';
-import Stack from './src/components/Stack';
+import Stacks from './src/components/Stacks';
 
 const App = () => {
     return (
         <NavigationContainer>
-            <Stack />
+            <Stacks />
         </NavigationContainer>
-        // <>
-        // <LoginScreen/>
-        // </>
     )
 }
 

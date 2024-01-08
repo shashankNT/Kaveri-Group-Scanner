@@ -7,17 +7,18 @@ import { MaterialIcons, Entypo, FontAwesome } from '@expo/vector-icons';
 
 
 
-const Tabs = () => {
+const Tabs = ({ navigationStack, route }) => {
 
+    const { setBaseAuth } = route.params || {};
     const Tab = createBottomTabNavigator();
 
     return (
 
         <Tab.Navigator
-            tabBarOptions={{
-                activeTintColor: appTheme.primaryColor,
-                inactiveTintColor: 'gray'
-            }}
+            // tabBarOptions={{
+            //     activeTintColor: appTheme.primaryColor,
+            //     inactiveTintColor: 'gray'
+            // }}
         >
             <Tab.Screen
                 name="Home"
@@ -40,6 +41,7 @@ const Tabs = () => {
             <Tab.Screen
                 name="Profile"
                 component={ProfileScreen}
+                initialParams={{ setBaseAuth: setBaseAuth, navigationStack: navigationStack }}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color, size }) => (

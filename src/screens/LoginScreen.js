@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import { appTheme } from "../colors";
 import { Ionicons } from "@expo/vector-icons";
+import base64 from 'react-native-base64';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image, View, StyleSheet, TextInput, Text, TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
 
-const LoginScreen = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+const LoginScreen = ({ navigation }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+
+    const handleLogin = async () => {
+
+        const basicAuthValue = 'Basic ' + base64.encode('svisamsetty@navtech.io:1234567890');
+        
+        await AsyncStorage.setItem('basicAuth', basicAuthValue);
+        
+        console.log("LoginScreen", email, password, basicAuthValue);
+
+        navigation.navigate('Tabs');
+    };
+
 
     return (
         <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: 'white', flex: 1 }}>
@@ -21,16 +35,16 @@ const LoginScreen = () => {
             <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginVertical: "15%" }} > Sign In </Text>
 
 
-            <TextInput style={styles.textInputContainer} placeholder="Your Email" selectionColor={appTheme.primaryColor} onChangeText={() => setEmail(email)} />
+            <TextInput value="svisamsetty@navtech.io" style={styles.textInputContainer} placeholder="Your Email" selectionColor={appTheme.primaryColor} onChangeText={() => setEmail(email)} />
             <View style={styles.textInputContainer}>
-                <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={() => setPassword(password)} secureTextEntry={!showPassword} />
+                <TextInput value="1234567890" style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={() => setPassword(password)} secureTextEntry={!showPassword} />
                 {showPassword
                     ? <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye" size={24} />
                     : <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye-off" size={24} />
                 }
             </View>
 
-            <TouchableOpacity style={styles.signInButton}>
+            <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
                 <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Sign In</Text>
             </TouchableOpacity>
 

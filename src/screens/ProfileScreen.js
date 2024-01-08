@@ -1,11 +1,18 @@
 import React from 'react'
 import { Ionicons, Fontisto } from '@expo/vector-icons';
-import { Text, View, Image, SafeAreaView, StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Text, View, Image, SafeAreaView, StatusBar, TouchableOpacity, RefreshControlBase } from 'react-native';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation, route }) => {
+
+    const handleLogOut = async () => {
+        AsyncStorage.removeItem('basicAuth');
+        // navigation.navigate('LoginScreen');
+    }
+
     return (
         <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: 'white', flex: 1 }}>
-          
+
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 20, marginBottom: 6, alignItems: 'center' }} >
                 <View>
                     <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Shyam Admin</Text>
@@ -20,10 +27,10 @@ const ProfileScreen = () => {
                 <Text style={{ fontSize: 18 }}> Settings </Text>
                 <Ionicons name="settings-sharp" size={24} color="gray" />
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
+            <TouchableOpacity onPress={handleLogOut} style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
                 <Text style={{ fontSize: 18 }}> Log out </Text>
                 <Fontisto name="power" size={24} color="gray" />
-            </View>
+            </TouchableOpacity>
 
         </SafeAreaView>
     )
