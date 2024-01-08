@@ -3,10 +3,10 @@ import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 22, backgroundColor: 'white', flex: 1 }}>
-      <TouchableOpacity style={styles.signInButton}>
+      <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate('ScannerScreen')}>
         <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Scan Barcode / QR Code</Text>
       </TouchableOpacity>
 
