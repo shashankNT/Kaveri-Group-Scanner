@@ -10,7 +10,7 @@ import { Text, SafeAreaView, StatusBar, View, FlatList, StyleSheet, TouchableOpa
 
 const ScannerSummaryScreen = ({ route, navigation }) => {
 
-    const lotNumber = '23KE30401';
+    const { lotNumber } = route.params;
     const [lotData, setLotData] = useState();
     const [testReportPDF, setTestReportPDF] = useState();
 
@@ -41,7 +41,7 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
                 Alert.alert('Permission needed', 'This app needs access to your Media library ');
                 return;
             }
-    
+
             console.log('Starting download..!!');
             const downloadResumable = FileSystem.createDownloadResumable(testReportPDF, FileSystem.cacheDirectory + `${lotNumber}.pdf`);
             const { uri } = await downloadResumable.downloadAsync(null, { shouldCache: false });
@@ -67,7 +67,7 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
     );
 
     return (
-        <SafeAreaView style={{paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 5, flex: 1, width: '100%', backgroundColor:'white' }}>
+        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 5, flex: 1, width: '100%', backgroundColor: 'white' }}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{ margin: 15 }}>
                 <Ionicons name="close-sharp" size={24} color="black" />
             </TouchableOpacity>
