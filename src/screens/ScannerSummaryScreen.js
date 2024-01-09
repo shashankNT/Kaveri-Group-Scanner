@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Text, SafeAreaView, StatusBar, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
-import { Ionicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { appTheme } from "../colors";
-import * as FileSystem from 'expo-file-system';
-import * as MediaLibrary from 'expo-media-library';
 import * as Print from "expo-print";
-
-
-
-
-
-
-
-
+import { appTheme } from "../colors";
+import { Ionicons } from '@expo/vector-icons';
+import * as FileSystem from 'expo-file-system';
+import React, { useEffect, useState } from 'react'
+import * as MediaLibrary from 'expo-media-library';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Text, SafeAreaView, StatusBar, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 
 const ScannerSummaryScreen = ({ route, navigation }) => {
 
     const lotNumber = '23KE30401';
-
     const [lotData, setLotData] = useState();
     const [testReportPDF, setTestReportPDF] = useState();
 
@@ -41,10 +32,6 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
     useEffect(() => {
         getApiData();
     }, []);
-
-
-
-
 
     const handleDownload = async () => {
 
@@ -80,9 +67,7 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
     );
 
     return (
-        <SafeAreaView style={{
-            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 5, flex: 1, width: '100%'
-        }}>
+        <SafeAreaView style={{paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 5, flex: 1, width: '100%', backgroundColor:'white' }}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{ margin: 15 }}>
                 <Ionicons name="close-sharp" size={24} color="black" />
             </TouchableOpacity>

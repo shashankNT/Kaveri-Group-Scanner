@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Platform, StatusBar, SafeAreaView } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { Text, View, StyleSheet, Platform, StatusBar, SafeAreaView } from 'react-native';
 
 const ScannerScreen = ({ navigation }) => {
     const [hasPermission, setHasPermission] = useState(null);

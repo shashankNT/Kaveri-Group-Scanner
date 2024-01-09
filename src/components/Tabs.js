@@ -7,9 +7,8 @@ import { MaterialIcons, Entypo, FontAwesome } from '@expo/vector-icons';
 
 
 
-const Tabs = ({ navigationStack, route }) => {
+const Tabs = () => {
 
-    const { setBaseAuth } = route.params || {};
     const Tab = createBottomTabNavigator();
 
     return (
@@ -41,7 +40,6 @@ const Tabs = ({ navigationStack, route }) => {
             <Tab.Screen
                 name="Profile"
                 component={ProfileScreen}
-                initialParams={{ setBaseAuth: setBaseAuth, navigationStack: navigationStack }}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color, size }) => (
