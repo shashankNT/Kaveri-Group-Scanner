@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
 
             <View style={styles.textInputContainer}>
-                <TextInput placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={() => setLotNumber(lotNumber)} />
+                <TextInput value='23KE30401' placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={() => setLotNumber(lotNumber)} />
                 <Ionicons onPress={handleSearch} style={{ paddingRight: 10, color: appTheme.primaryColor }} name="search-sharp" size={24} />
             </View>
 

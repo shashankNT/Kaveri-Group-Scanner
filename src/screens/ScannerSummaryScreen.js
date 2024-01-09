@@ -4,6 +4,10 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { appTheme } from "../colors";
+import { shareAsync } from 'expo-sharing';
+import * as FileSystem from 'expo-file-system';
+
+
 
 
 const ScannerSummaryScreen = ({ route, navigation }) => {
@@ -11,6 +15,7 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
     const lotNumber = '23KE30401';
 
     const [lotData, setLotData] = useState();
+    const [testReportPDF, setTestReportPDF] = useState();
 
     const getApiData = async () => {
         try {
@@ -18,10 +23,9 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
             const credentials = await AsyncStorage.getItem('basicAuth');
             const response = await axios.get(`https://portal.kaveri.group/search.json?lot_number=${lotNumber}`, { headers: { Authorization: credentials } });
 
-            console.log('scanner', response.data);
-
             const formattedData = Object.entries(response.data.test_report_items);
             setLotData(formattedData);
+            setTestReportPDF(response.data.test_report_summary);
 
         } catch (error) {
             console.log("error", error);
@@ -33,8 +37,18 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
     }, []);
 
 
-    const handleDownload = () => {
-        console.log('Downlaod');
+    const handleDownload = async () => {
+        try {
+            
+            const downloadResumable = FileSystem.createDownloadResumable(testReportPDF, FileSystem.documentDirectory + `${lotNumber}.pdf`, {});
+            const { uri } = await downloadResumable.downloadAsync();
+            console.log('Finished downloading to ', uri);
+
+            await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
+
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     const renderRow = ({ item }) => (
