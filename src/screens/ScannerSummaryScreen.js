@@ -4,8 +4,14 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { appTheme } from "../colors";
-import { shareAsync } from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
+import * as Print from "expo-print";
+
+
+
+
+
 
 
 
@@ -37,17 +43,32 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
     }, []);
 
 
+
+
+
     const handleDownload = async () => {
+
         try {
-            
-            const downloadResumable = FileSystem.createDownloadResumable(testReportPDF, FileSystem.documentDirectory + `${lotNumber}.pdf`, {});
-            const { uri } = await downloadResumable.downloadAsync();
-            console.log('Finished downloading to ', uri);
+            const { status } = await MediaLibrary.requestPermissionsAsync();
+            if (status !== 'granted') {
+                Alert.alert('Permission needed', 'This app needs access to your Media library ');
+                return;
+            }
+    
+            console.log('Starting download..!!');
+            const downloadResumable = FileSystem.createDownloadResumable(testReportPDF, FileSystem.cacheDirectory + `${lotNumber}.pdf`);
+            const { uri } = await downloadResumable.downloadAsync(null, { shouldCache: false });
+            console.log('Download completed successfully', uri);
 
-            await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
+            await Print.printAsync({ uri });
 
-        } catch (e) {
-            console.error(e);
+            // const asset = await MediaLibrary.createAssetAsync(uri);
+            // console.log('Asset created successfully', asset);
+
+            // await shareAsync(uri, { UTI: ".pdf", mimeType: "application/pdf" });
+
+        } catch (err) {
+            console.log(err);
         }
     }
 
@@ -59,7 +80,9 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
     );
 
     return (
-        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 5, flex: 1, width: '100%' }}>
+        <SafeAreaView style={{
+            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 5, flex: 1, width: '100%'
+        }}>
             <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{ margin: 15 }}>
                 <Ionicons name="close-sharp" size={24} color="black" />
             </TouchableOpacity>
@@ -84,7 +107,7 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
                 </TouchableOpacity>
             </View>
 
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 
