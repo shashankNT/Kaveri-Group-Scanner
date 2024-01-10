@@ -77,8 +77,6 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
                         ? <View style={{ paddingTop: 100 }}> <ActivityIndicator size="large" color={appTheme.primaryColor} /> </View>
                         : <SummaryTable lotData={lotData} />
                 }
-
-
                 <DownloadSummary handleDownload={handleDownload} />
 
 
