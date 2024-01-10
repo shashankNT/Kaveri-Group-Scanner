@@ -1,5 +1,6 @@
 import React from 'react'
 import HomeScreen from '../screens/HomeScreen';
+import SignUpScreen from '../screens/SignUpScreen'
 import LoginScreen from '../screens/LoginScreen'
 import OffersScreen from '../screens/OffersScreen';
 import ScannerScreen from '../screens/ScannerScreen'
@@ -12,8 +13,9 @@ const Stack = () => {
     const Stack = createNativeStackNavigator();
 
     return (
-        <Stack.Navigator initialRouteName={'LoginScreen'}>
+        <Stack.Navigator>
 
+            <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{ headerShown: false }} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ScannerScreen" component={ScannerScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ScannerSummaryScreen" component={ScannerSummaryScreen} options={{ headerShown: false }} />

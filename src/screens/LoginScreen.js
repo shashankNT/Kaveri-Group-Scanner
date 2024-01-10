@@ -19,22 +19,19 @@ const LoginScreen = ({ navigation }) => {
         navigation.navigate('Home');
     };
 
-    const handlePolicy = () => {
-        Linking.openURL('https://portal.kaveri.group/privacy-policy')
-    }
-
-
     return (
-        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: 'white', flex: 1 }}>
-            {/* <TouchableOpacity style={{ paddingTop: 15 }}>
+        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: 'white', padding: 20, flex: 1 }}>
+            <TouchableOpacity style={{ paddingTop: 15 }}>
                 <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
-            <View style={{ alignItems: "center", marginTop: 50 }}>
-                <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1 }} />
+            <View style={{ alignItems: "center", margin: 50 }}>
+                <View style={{ height: 120, borderRadius: 10, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
+                    <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1, padding: 5 }} />
+                </View>
             </View>
 
-            <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginVertical: "15%" }} > Sign In </Text>
+            <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginVertical: "5%" }} > Sign In </Text>
 
 
             <TextInput style={styles.textInputContainer} placeholder="Your Email" selectionColor={appTheme.primaryColor} onChangeText={() => setEmail(email)} />
@@ -49,13 +46,9 @@ const LoginScreen = ({ navigation }) => {
             <TouchableOpacity style={styles.signInButton} onPress={handleLogin}>
                 <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Sign In</Text>
             </TouchableOpacity>
-            <View style={{ alignItems: 'center' }}>
-                <Text style={{ fontSize: 10, color: 'gray',  }}>By signing in you agreet to our</Text>
-                <Text onPress={handlePolicy} style={{ fontSize: 10, color: 'gray', textDecorationLine:'underline' }}>Terms & Privacy Policy.</Text>
-            </View>
 
-            {/* <Text style={styles.plainText}> Forgot Password? </Text>
-            <Text style={styles.plainText}> Don't have an account?  <Text style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign Up</Text> </Text> */}
+            <Text style={styles.plainText}> Forgot Password? </Text>
+            <Text style={styles.plainText}> Don't have an account?  <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign Up</Text> </Text>
 
         </SafeAreaView>
     );
@@ -88,7 +81,6 @@ const styles = StyleSheet.create({
     plainText: {
         textAlign: 'center',
         color: 'gray',
-        fontSize: 16,
         marginVertical: 20
     },
     hidePassword: {
