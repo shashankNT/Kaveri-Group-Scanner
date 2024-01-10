@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TabBarButton from '../components/TabBarButton';
 import { Ionicons, Fontisto } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Text, View, Image, SafeAreaView, StatusBar, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import { Text, View, Image, SafeAreaView, StatusBar, TouchableOpacity, TouchableWithoutFeedback, Modal, StyleSheet } from 'react-native';
 import { appTheme } from '../colors';
 
 const ProfileScreen = ({ navigation }) => {
@@ -40,20 +40,23 @@ const ProfileScreen = ({ navigation }) => {
                 <TabBarButton activeTab='Profile' navigation={navigation} />
 
 
-                <Modal transparent={true} visible={modalVisible} onRequestClose={() => { setModalVisible(!modalVisible) }}>
-                    <SafeAreaView style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <Text style={{ fontSize: 16, marginBottom: 40, textAlign: 'center' }}>Are you sure you want to Log out?</Text>
-                            <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 5 }}>
-                                <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={() => setModalVisible(false)}>
-                                    <Text style={{ color: 'gray', fontWeight: 'bold' }}>Cancel</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{ marginHorizontal: 15 }} onPress={handleLogOut}>
-                                    <Text style={{ color: appTheme.primaryColor, fontWeight: 'bold' }}>Log out</Text>
-                                </TouchableOpacity>
+                <Modal transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(!modalVisible)}>
+                    <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
+
+                        <SafeAreaView style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={{ fontSize: 16, marginBottom: 40, textAlign: 'center' }}>Are you sure you want to Log out?</Text>
+                                <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 5 }}>
+                                    <TouchableOpacity style={{ marginHorizontal: 10 }} onPress={() => setModalVisible(false)}>
+                                        <Text style={{ color: 'gray', fontWeight: 'bold' }}>Cancel</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{ marginHorizontal: 15 }} onPress={handleLogOut}>
+                                        <Text style={{ color: appTheme.primaryColor, fontWeight: 'bold' }}>Log out</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                        </View>
-                    </SafeAreaView>
+                        </SafeAreaView>
+                    </TouchableWithoutFeedback>
                 </Modal>
 
             </SafeAreaView>

@@ -37,11 +37,7 @@ const SignUpScreen = ({ navigation }) => {
             <TextInput style={styles.textInputContainer} placeholder="Your Email" selectionColor={appTheme.primaryColor} onChangeText={() => setEmail(email)} />
             <TextInput style={styles.textInputContainer} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={() => setPassword(password)} />
             <TextInput style={styles.textInputContainer} placeholder="Phone Number" selectionColor={appTheme.primaryColor} onChangeText={() => setPhoneNumber(phoneNumber)} />
-            <TextInput style={styles.textInputContainer} placeholder="Role" selectionColor={appTheme.primaryColor} onChangeText={() => setRole(role)} />
-
-            <TouchableOpacity style={styles.signInButton} onPress={handleSignUp}>
-                <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Sign up</Text>
-            </TouchableOpacity>
+ 
             <View style={{ alignItems: 'center' }}>
                 <Text style={{ fontSize: 10, color: 'gray', }}>By signing in you agreet to our</Text>
                 <Text onPress={handlePolicy} style={{ fontSize: 10, color: 'gray', textDecorationLine: 'underline' }}>Terms & Privacy Policy.</Text>

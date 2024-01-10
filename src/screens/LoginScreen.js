@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import base64 from 'react-native-base64';
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Image, View, StyleSheet, TextInput, Text, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native";
+import { Image, View, StyleSheet, TextInput, Text, TouchableOpacity, SafeAreaView, StatusBar, Linking, Modal, TouchableWithoutFeedback } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [modalVisible, setModalVisible] = useState(true);
+    const [resetEmail, setResetEmail] = useState('');
 
     const handleLogin = async () => {
 
@@ -18,6 +20,10 @@ const LoginScreen = ({ navigation }) => {
 
         navigation.navigate('Home');
     };
+
+    const handleResetPassword = async () => {
+        console.log('Reset Password => send email to', resetEmail);
+    }
 
     return (
         <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: 'white', padding: 20, flex: 1 }}>
@@ -47,8 +53,25 @@ const LoginScreen = ({ navigation }) => {
                 <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Sign In</Text>
             </TouchableOpacity>
 
-            <Text style={styles.plainText}> Forgot Password? </Text>
+            <Text style={styles.plainText} onPress={() => setModalVisible(!modalVisible)}> Forgot Password? </Text>
             <Text style={styles.plainText}> Don't have an account?  <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign Up</Text> </Text>
+
+
+            <Modal transparent={true} visible={modalVisible} onPress={() => setModalVisible(!modalVisible)}>
+                <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
+                    <SafeAreaView style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Ionicons onPress={() => setModalVisible(!modalVisible)} style={{ position: 'absolute', right: 12, top: 12, }} name="close" size={30} color={appTheme.primaryColor} />
+                            <Text style={{ fontSize: 16, fontWeight: 'bold', marginTop: 40 }}>Reset Password</Text>
+                            <Text style={{ fontSize: 12, marginVertical: 40, paddingHorizontal: 30 }}>Please enter your email address to receive instructions on how to reset your password.</Text>
+                            <TextInput style={styles.textInputContainer} placeholder="You Email" selectionColor={appTheme.primaryColor} onChangeText={() => setResetEmail(resetEmail)} />
+                            <TouchableOpacity style={styles.signInButton} onPress={handleResetPassword}>
+                                <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Reset Password</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </SafeAreaView>
+                </TouchableWithoutFeedback>
+            </Modal>
 
         </SafeAreaView>
     );
@@ -77,6 +100,7 @@ const styles = StyleSheet.create({
         shadowColor: "black",
         shadowOpacity: 0.8,
         elevation: 8,
+        width: '100%'
     },
     plainText: {
         textAlign: 'center',
@@ -99,4 +123,19 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: "center",
     },
+    centeredView: {
+        width: '100%',
+        flex: 1,
+        alignItems: "center",
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    modalView: {
+        // margin: 35,
+        padding: 20,
+        borderRadius: 15,
+        width: '90%',
+        backgroundColor: 'white',
+        alignItems: 'center',
+    }
 });

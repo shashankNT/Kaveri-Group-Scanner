@@ -15,8 +15,8 @@ const Stack = () => {
     return (
         <Stack.Navigator>
 
-            <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{ headerShown: false }} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ScannerScreen" component={ScannerScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ScannerSummaryScreen" component={ScannerSummaryScreen} options={{ headerShown: false }} />
 
