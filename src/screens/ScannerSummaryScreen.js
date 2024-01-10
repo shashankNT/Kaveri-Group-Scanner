@@ -7,22 +7,28 @@ import * as MediaLibrary from 'expo-media-library';
 import SummaryTable from '../components/SummaryTable'
 import DownloadSummary from '../components/DownloadSummary';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Text, SafeAreaView, StatusBar } from 'react-native'
+import { Text, SafeAreaView, StatusBar, ActivityIndicator, View } from 'react-native'
+import { appTheme } from '../colors';
 
 const ScannerSummaryScreen = ({ route, navigation }) => {
 
     const { lotNumber } = route.params;
     const [lotData, setLotData] = useState();
     const [testReportPDF, setTestReportPDF] = useState();
+    const [loader, setLoader] = useState(false);
 
     const getApiData = async () => {
         try {
+
+            setLoader(true);
 
             const credentials = await AsyncStorage.getItem('basicAuth');
             const response = await axios.get(`https://portal.kaveri.group/search.json?lot_number=${lotNumber}`, { headers: { Authorization: credentials } });
 
             setLotData(response.data.test_report_items);
             setTestReportPDF(response.data.test_report_summary);
+
+            setLoader(false);
 
         } catch (error) {
             console.log("error", error);
@@ -65,8 +71,16 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
 
                 <Ionicons name="close-sharp" size={24} onPress={() => navigation.navigate('Home')} style={{ margin: 15, color: 'black' }} />
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 15 }}> Reference No. - {lotNumber}</Text>
-                <SummaryTable lotData={lotData} />
+
+                {
+                    loader
+                        ? <View style={{ paddingTop: 100 }}> <ActivityIndicator size="large" color={appTheme.primaryColor} /> </View>
+                        : <SummaryTable lotData={lotData} />
+                }
+
+
                 <DownloadSummary handleDownload={handleDownload} />
+
 
             </SafeAreaView >
         </>
