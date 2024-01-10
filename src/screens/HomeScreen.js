@@ -6,7 +6,7 @@ import { Platform, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, 
 
 const HomeScreen = ({ navigation }) => {
 
-    const [lotNumber, setLotNumber] = useState('');
+    const [lotNumber, setLotNumber] = useState('23KE30501');
 
     const handleSearch = () => {
         navigation.navigate('ScannerSummaryScreen', { lotNumber: lotNumber });
@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <View style={styles.textInputContainer}>
-                    <TextInput placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={() => setLotNumber(lotNumber)} />
+                    <TextInput value='23KE30501' placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={() => setLotNumber(lotNumber)} />
                     <Ionicons onPress={handleSearch} style={{ paddingRight: 10, color: appTheme.primaryColor }} name="search-sharp" size={24} />
                 </View>
 

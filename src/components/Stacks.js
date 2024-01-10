@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen'
 import OffersScreen from '../screens/OffersScreen';
 import ScannerScreen from '../screens/ScannerScreen'
 import ProfileScreen from '../screens/ProfileScreen';
 import ScannerSummaryScreen from '../screens/ScannerSummaryScreen'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = () => {
 
     const Stack = createNativeStackNavigator();
-    const [baseAuth, setBaseAuth] = useState('');
-
-    const chackAuth = async () => {
-        setBaseAuth(await AsyncStorage.getItem('basicAuth'));
-    }
-
-    useEffect(() => {
-        chackAuth();
-    }, [baseAuth])
-
 
     return (
-        <Stack.Navigator initialRouteName={baseAuth === '' ? 'LoginScreen' : 'Tabs'}>
+        <Stack.Navigator initialRouteName={'LoginScreen'}>
 
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ScannerScreen" component={ScannerScreen} options={{ headerShown: false }} />
