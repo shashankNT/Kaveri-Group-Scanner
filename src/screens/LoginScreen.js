@@ -32,13 +32,13 @@ const LoginScreen = ({ navigation }) => {
             <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, padding: 20, flex: 1 }}>
                 <BackArrowIcon navigation={navigation} />
 
-                <View style={{ alignItems: "center", margin: 50 }}>
+                <View style={{ alignItems: "center", marginTop: 50, marginBottom: 30 }}>
                     <View style={{ height: 120, borderRadius: 10, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
-                        <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1, padding: 5 }} />
+                        <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1 }} />
                     </View>
                 </View>
 
-                <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", marginVertical: "5%" }} > Sign In </Text>
+                <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 20 }} > Sign In </Text>
 
                 <InputCard placeholder={'Your Email'} input={email} setInput={setEmail} />
 

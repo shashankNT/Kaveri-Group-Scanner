@@ -1,5 +1,6 @@
 import React from 'react'
 import { appTheme } from "../colors";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 
 const LogoutWarningModal = ({ modalVisible, setModalVisible, navigation }) => {
