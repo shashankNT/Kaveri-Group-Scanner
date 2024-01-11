@@ -7,13 +7,13 @@ import { Text, View, Image, SafeAreaView, StatusBar, TouchableOpacity } from 're
 
 const ProfileScreen = ({ navigation }) => {
 
-    const [modalVisible, setModalVisible] = useState(false); 
+    const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <>
             <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
 
-                <View style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 20, marginBottom: 6, alignItems: 'center' }} >
+                <TouchableOpacity onPress={() => navigation.navigate('UserInfoScreen')} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 20, marginBottom: 6, alignItems: 'center' }} >
                     <View>
                         <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Shyam Admin</Text>
                         <Text style={{ fontSize: 16, color: 'gray' }}>View Profile</Text>
@@ -21,7 +21,7 @@ const ProfileScreen = ({ navigation }) => {
                     <View>
                         <Image source={require('../images/logo_icon.jpg')} style={{ height: 90, aspectRatio: 1, borderRadius: 75 }} />
                     </View>
-                </View>
+                </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => navigation.navigate('SettingsScreen')} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
                     <Text style={{ fontSize: 18 }}> Settings </Text>

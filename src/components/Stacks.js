@@ -9,6 +9,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import ScannerSummaryScreen from '../screens/ScannerSummaryScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChangePasswordScreen from '../screens/ChangePasswordScreen';
+import UserInfoScreen from '../screens/UserInfoScreen';
 
 const Stack = () => {
 
@@ -20,8 +21,9 @@ const Stack = () => {
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ScannerScreen" component={ScannerScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="ScannerSummaryScreen" component={ScannerSummaryScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="UserInfoScreen" component={UserInfoScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SettingsScreen" component={SettingsScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="ScannerSummaryScreen" component={ScannerSummaryScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ChangePasswordScreen" component={ChangePasswordScreen} options={{ headerShown: false }} />
 
             <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
