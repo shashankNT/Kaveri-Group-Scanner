@@ -11,8 +11,8 @@ const SignUpScreen = ({ navigation }) => {
     const rolesData = [
         { label: 'Admin', value: 'Admin' },
         { label: 'Staff', value: 'Staff' },
+        { label: 'Agent', value: 'Agent' },
         { label: 'Customer', value: 'Customer' },
-        { label: 'Agent', value: 'Agent' }
     ];
 
     const [name, setName] = useState('');
@@ -53,6 +53,7 @@ const SignUpScreen = ({ navigation }) => {
                     labelField="label"
                     valueField="value"
                     value={role}
+                    iconColor={appTheme.primaryColor}
                     onChange={item => {
                         setRole(item.value);
                     }}
