@@ -3,7 +3,9 @@ import { appTheme } from '../colors';
 import BackArrowIcon from '../components/BackArrowIcon'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
-import { Image, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import UserAvatar from 'react-native-user-avatar';
+
 
 const UserInfoScreen = ({ navigation }) => {
     return (
@@ -12,8 +14,8 @@ const UserInfoScreen = ({ navigation }) => {
                 <BackArrowIcon navigation={navigation} />
 
                 <View style={{ alignItems: "center", marginVertical: 30 }}>
-                    <View style={{ height: 120, borderRadius: 100, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
-                        <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1, padding: 5, borderRadius: 100 }} />
+                    <View style={{ height: 120, borderRadius: 100, alignItems: "center", justifyContent: 'center', backgroundColor: 'lightgray', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
+                        <UserAvatar size={120} name="Shyam Admin" textColor={appTheme.primaryColor} bgColor="lightgray" />
                     </View>
                 </View>
 
