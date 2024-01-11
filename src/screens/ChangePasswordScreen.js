@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native'
-import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView, Text, TextInput } from 'react-native'
 import InputCard from '../components/InputCard';
 import SubmitButton from '../components/SubmitButton';
-import { styles } from '../components/InputCard'
+import { inputCardStyles } from '../components/InputCard'
 import { appTheme } from '../colors';
 import BackArrowIcon from '../components/BackArrowIcon';
 
@@ -29,11 +28,11 @@ const ChangePasswordScreen = ({ navigation }) => {
             <Text style={{ paddingVertical: 14, fontSize: 20, fontWeight: 'bold' }}>Change Password</Text>
             <Text style={{ paddingBottom: 15, fontSize: 12, color: 'gray' }}>Enter your new password and confirm your password</Text>
 
-            <TextInput style={styles.textInputContainer} value='email' editable={false} selectTextOnFocus={false} />
+            <TextInput style={inputCardStyles.textInputContainer} value='email' editable={false} selectTextOnFocus={false} />
             <InputCard input={currentPassowrd} setInput={setCurrentPassowrd} placeholder={'Current Password'} />
             <InputCard input={newPassword} setInput={setNewPassword} placeholder={'New Password'} />
             <InputCard input={confirmPassword} setInput={setConfirmPassword} placeholder={'Confirm New Password'} />
-            <SubmitButton handleSubmit={handleSubmit} />
+            <SubmitButton text={'Apply'} onPress={handleSubmit} />
 
         </SafeAreaView>
     )

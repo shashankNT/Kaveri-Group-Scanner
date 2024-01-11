@@ -2,6 +2,8 @@ import { appTheme } from "../colors";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Image, View, StyleSheet, TextInput, Text, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native";
+import InputCard from "../components/InputCard";
+import SubmitButton from "../components/SubmitButton";
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -33,21 +35,21 @@ const SignUpScreen = ({ navigation }) => {
 
             <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 25 }} > Sign Up </Text>
 
-            <TextInput style={styles.textInputContainer} placeholder="Name" selectionColor={appTheme.primaryColor} onChangeText={() => setName(name)} />
-            <TextInput style={styles.textInputContainer} placeholder="Your Email" selectionColor={appTheme.primaryColor} onChangeText={() => setEmail(email)} />
-            <TextInput style={styles.textInputContainer} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={() => setPassword(password)} />
-            <TextInput style={styles.textInputContainer} placeholder="Phone Number" selectionColor={appTheme.primaryColor} onChangeText={() => setPhoneNumber(phoneNumber)} />
-            <TextInput style={styles.textInputContainer} placeholder="Role" selectionColor={appTheme.primaryColor} onChangeText={() => setRole(role)} />
 
-            <TouchableOpacity style={styles.signInButton} onPress={handleSignUp}>
-                <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Sign up</Text>
-            </TouchableOpacity>
+            <InputCard placeholder={'Name'} input={name} setInput={setName} />
+            <InputCard placeholder={'Your Email'} input={email} setInput={setEmail} />
+            <InputCard placeholder={'Password'} input={password} setInput={setPassword} />
+            <InputCard placeholder={'Phone Number'} input={phoneNumber} setInput={setPhoneNumber} />
+            <InputCard placeholder={'Role'} input={role} setInput={setRole} />
+
+            <SubmitButton text={'Sign up'} onPress={handleSignUp}/>
+
             <View style={{ alignItems: 'center' }}>
                 <Text style={{ fontSize: 10, color: 'gray', }}>By signing in you agreet to our</Text>
                 <Text onPress={handlePolicy} style={{ fontSize: 10, color: 'gray', textDecorationLine: 'underline' }}>Terms & Privacy Policy.</Text>
             </View>
 
-            <Text style={styles.plainText}> Already have account?. <Text onPress={() => { navigation.navigate('LoginScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign In</Text> </Text>
+            <Text style={{ textAlign: 'center', color: 'gray', marginVertical: 25 }}> Already have account?. <Text onPress={() => { navigation.navigate('LoginScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign In</Text> </Text>
 
         </SafeAreaView>
     )
@@ -57,36 +59,8 @@ export default SignUpScreen
 
 
 const styles = StyleSheet.create({
-    input: {
-        borderColor: "gray",
-        borderWidth: 1,
-        padding: 12,
-        borderRadius: 10,
-        borderWidth: 1,
-        marginVertical: 5,
-    },
-    textInputContainer: {
-        height: 50,
-        backgroundColor: "white",
-        alignItems: "center",
-        flexDirection: "row",
-        paddingLeft: 20,
-        paddingRight: 10,
-        marginVertical: 8,
-        borderRadius: 50,
-        shadowColor: "gray",
-        shadowOpacity: 0.8,
-        elevation: 5,
-    },
-    plainText: {
-        textAlign: 'center',
-        color: 'gray',
-        marginVertical: 25
-    },
-    hidePassword: {
-        padding: 10,
-        color: appTheme.primaryColor,
-    },
+
+
     signInButton: {
         marginVertical: "5%",
         width: "100%",

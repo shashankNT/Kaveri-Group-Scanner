@@ -6,7 +6,7 @@ const InputCard = ({ placeholder, input, setInput }) => {
     return (
         <>
             <TextInput
-                style={styles.textInputContainer}
+                style={inputCardStyles.textInputContainer}
                 placeholder={placeholder}
                 selectionColor={appTheme.primaryColor}
                 onChangeText={() => setInput(input)}
@@ -17,8 +17,9 @@ const InputCard = ({ placeholder, input, setInput }) => {
 
 export default InputCard
 
-export const styles = StyleSheet.create({
+export const inputCardStyles = StyleSheet.create({
     textInputContainer: {
+        width:'100%',
         height: 50,
         backgroundColor: "white",
         alignItems: "center",

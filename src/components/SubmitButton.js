@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { appTheme } from '../colors'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
-const SubmitButton = ({ handleSubmit }) => {
+const SubmitButton = ({ text, onPress }) => {
     return (
         <>
-            <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Apply</Text>
+            <TouchableOpacity style={styles.submitButton} onPress={onPress}>
+                <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>{text}</Text>
             </TouchableOpacity>
         </>
     )
