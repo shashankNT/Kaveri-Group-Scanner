@@ -13,7 +13,6 @@ const ResetPasswordModal = ({ modalVisible, setModalVisible}) => {
         console.log('Reset Password => send email to', resetEmail);
     }
 
-
     return (
         <>
             <Modal transparent={true} visible={modalVisible} onPress={() => setModalVisible(!modalVisible)}>

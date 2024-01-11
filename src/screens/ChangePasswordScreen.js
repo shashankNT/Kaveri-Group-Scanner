@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar'
+import { appTheme } from '../colors';
 import React, { useState } from 'react'
-import { SafeAreaView, Text, TextInput } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
 import InputCard from '../components/InputCard';
 import SubmitButton from '../components/SubmitButton';
-import { inputCardStyles } from '../components/InputCard'
-import { appTheme } from '../colors';
 import BackArrowIcon from '../components/BackArrowIcon';
+import { inputCardStyles } from '../components/InputCard'
+import { SafeAreaView, Text, TextInput } from 'react-native'
 
 
 const ChangePasswordScreen = ({ navigation }) => {
@@ -18,7 +18,6 @@ const ChangePasswordScreen = ({ navigation }) => {
         console.log('Password change');
         navigation.goBack();
     }
-
 
     return (
         <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>

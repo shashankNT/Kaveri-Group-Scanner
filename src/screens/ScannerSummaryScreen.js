@@ -67,7 +67,7 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
 
     return (
         <>
-            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, flex: 1, backgroundColor: 'white' }}>
+            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, flex: 1, backgroundColor: appTheme.backgroundColor, }}>
 
                 <Ionicons name="close-sharp" size={24} onPress={() => navigation.navigate('Home')} style={{ margin: 15, color: 'black' }} />
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 15 }}> Reference No. - {lotNumber}</Text>

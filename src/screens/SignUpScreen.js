@@ -1,7 +1,7 @@
 import { appTheme } from "../colors";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { Image, View, StyleSheet, TextInput, Text, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native";
+import { Image, View, StyleSheet, Text, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native";
 import InputCard from "../components/InputCard";
 import SubmitButton from "../components/SubmitButton";
 
@@ -22,7 +22,7 @@ const SignUpScreen = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: 'white', flex: 1 }}>
+        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
             <TouchableOpacity style={{ paddingTop: 15 }}>
                 <Ionicons name="arrow-back" size={24} color="black" />
             </TouchableOpacity>

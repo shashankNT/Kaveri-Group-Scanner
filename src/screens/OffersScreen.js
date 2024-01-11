@@ -16,7 +16,7 @@ const OffersScreen = ({ navigation }) => {
     }, []);
 
     return (
-        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: 'white', flex: 1 }}>
+        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
             <ScrollView
                 contentContainerStyle={{ flex: 1, justifyContent: 'center' }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
