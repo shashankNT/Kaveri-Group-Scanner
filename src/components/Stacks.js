@@ -4,6 +4,7 @@ import SignUpScreen from '../screens/SignUpScreen'
 import LoginScreen from '../screens/LoginScreen'
 import OffersScreen from '../screens/OffersScreen';
 import ScannerScreen from '../screens/ScannerScreen'
+import LandingScreen from '../screens/LandingScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import ProfileScreen from '../screens/ProfileScreen';
 import ScannerSummaryScreen from '../screens/ScannerSummaryScreen'
@@ -18,6 +19,7 @@ const Stack = () => {
     return (
         <Stack.Navigator>
 
+            <Stack.Screen name="LandingScreen" component={LandingScreen} options={{ headerShown: false }} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ScannerScreen" component={ScannerScreen} options={{ headerShown: false }} />

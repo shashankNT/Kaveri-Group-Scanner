@@ -1,9 +1,9 @@
 import { appTheme } from "../colors";
 import React, { useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { Image, View, StyleSheet, Text, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native";
 import InputCard from "../components/InputCard";
 import SubmitButton from "../components/SubmitButton";
+import { Image, View, StyleSheet, Text, TouchableOpacity, SafeAreaView, StatusBar, Linking } from "react-native";
+import BackArrowIcon from "../components/BackArrowIcon";
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -14,7 +14,7 @@ const SignUpScreen = ({ navigation }) => {
     const [role, setRole] = useState('');
 
     const handleSignUp = async () => {
-        navigation.navigate('Home');
+        navigation.navigate('LoginScreen');
     };
 
     const handlePolicy = () => {
@@ -23,12 +23,10 @@ const SignUpScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
-            <TouchableOpacity style={{ paddingTop: 15 }}>
-                <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
+            <BackArrowIcon navigation={navigation} />
 
             <View style={{ alignItems: "center", margin: 20 }}>
-                <View style={{ height: 120, borderRadius: 10, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
+                <View style={{ hFeight: 120, borderRadius: 10, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
                     <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1, padding: 5 }} />
                 </View>
             </View>
@@ -42,7 +40,7 @@ const SignUpScreen = ({ navigation }) => {
             <InputCard placeholder={'Phone Number'} input={phoneNumber} setInput={setPhoneNumber} />
             <InputCard placeholder={'Role'} input={role} setInput={setRole} />
 
-            <SubmitButton text={'Sign up'} onPress={handleSignUp}/>
+            <SubmitButton text={'Sign up'} onPress={handleSignUp} />
 
             <View style={{ alignItems: 'center' }}>
                 <Text style={{ fontSize: 10, color: 'gray', }}>By signing in you agreet to our</Text>
@@ -57,20 +55,3 @@ const SignUpScreen = ({ navigation }) => {
 
 export default SignUpScreen
 
-
-const styles = StyleSheet.create({
-
-
-    signInButton: {
-        marginVertical: "5%",
-        width: "100%",
-        backgroundColor: appTheme.primaryColor,
-        borderRadius: 50,
-        alignItems: "center",
-        shadowColor: "black",
-        shadowOpacity: 0.8,
-        elevation: 8,
-        height: 50,
-        justifyContent: "center",
-    },
-});
