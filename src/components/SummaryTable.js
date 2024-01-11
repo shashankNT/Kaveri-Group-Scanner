@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 const SummaryTable = ({ lotData }) => {
 
     return (
-        <View style={{margin:15}}>
+        <View style={{ margin: 15, borderWidth: 1, borderColor: '#d9d9d9' }}>
             <View style={{ flexDirection: 'row' }}>
                 <Text style={[styles.tableCell, { flex: 5, fontWeight: 'bold', fontSize: 15 }]}>Parameter</Text>
                 <Text style={[styles.tableCell, { flex: 4, fontWeight: 'bold', fontSize: 15 }]}>Reading</Text>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 
     tableCell: {
         borderWidth: 1,
-        borderColor: '#f2f2f2',
+        borderColor: '#d9d9d9',
         padding: 8,
     }
 })

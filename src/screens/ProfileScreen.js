@@ -1,10 +1,10 @@
 import { appTheme } from '../colors';
 import React, { useState } from 'react'
+import UserAvatar from 'react-native-user-avatar';
 import TabBarButton from '../components/TabBarButton';
 import { Ionicons, Fontisto } from '@expo/vector-icons';
 import LogoutWarningModal from '../components/LogoutWarningModal';
 import { Text, View, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
-import UserAvatar from 'react-native-user-avatar';
 
 
 const ProfileScreen = ({ navigation }) => {

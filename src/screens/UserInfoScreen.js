@@ -1,10 +1,10 @@
 import React from 'react'
 import { appTheme } from '../colors';
+import { Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import UserAvatar from 'react-native-user-avatar';
 import BackArrowIcon from '../components/BackArrowIcon'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { StatusBar } from 'expo-status-bar'
-import { Text, View } from 'react-native';
-import UserAvatar from 'react-native-user-avatar';
 
 
 const UserInfoScreen = ({ navigation }) => {

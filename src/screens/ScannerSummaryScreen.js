@@ -70,13 +70,12 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
             <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, flex: 1, backgroundColor: appTheme.backgroundColor, }}>
 
                 <Ionicons name="close-sharp" size={24} onPress={() => navigation.navigate('Home')} style={{ margin: 15, color: 'black' }} />
-                <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 15 }}> Reference No. - {lotNumber}</Text>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 15 }}>Reference No. - {lotNumber}</Text>
 
                 {
-                    // loader
-                    //     ? <View style={{ paddingTop: 100 }}> <ActivityIndicator size="large" color={appTheme.primaryColor} /> </View>
-                    //     :
-                         <SummaryTable lotData={lotData} />
+                    loader
+                        ? <View style={{ paddingTop: 100 }}><ActivityIndicator size="large" color={appTheme.primaryColor} /></View>
+                        : <SummaryTable lotData={lotData} />
                 }
                 <DownloadSummary handleDownload={handleDownload} />
 
