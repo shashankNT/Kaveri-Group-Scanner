@@ -73,9 +73,10 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
                 <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 15 }}> Reference No. - {lotNumber}</Text>
 
                 {
-                    loader
-                        ? <View style={{ paddingTop: 100 }}> <ActivityIndicator size="large" color={appTheme.primaryColor} /> </View>
-                        : <SummaryTable lotData={lotData} />
+                    // loader
+                    //     ? <View style={{ paddingTop: 100 }}> <ActivityIndicator size="large" color={appTheme.primaryColor} /> </View>
+                    //     :
+                         <SummaryTable lotData={lotData} />
                 }
                 <DownloadSummary handleDownload={handleDownload} />
 

@@ -10,7 +10,7 @@ const ProfileScreen = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleLogOut = async () => {
-        AsyncStorage.removeItem('basicAuth');
+        await AsyncStorage.removeItem('basicAuth');
         navigation.navigate('LoginScreen');
     }
 
@@ -28,11 +28,11 @@ const ProfileScreen = ({ navigation }) => {
                     </View>
                 </View>
 
-                <View style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
+                <TouchableOpacity onPress={() => navigation.navigate('SettingsScreen')} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
                     <Text style={{ fontSize: 18 }}> Settings </Text>
                     <Ionicons name="settings-sharp" size={24} color="gray" />
-                </View>
-                <TouchableOpacity onPress={() => { setModalVisible(true) }} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setModalVisible(true)} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
                     <Text style={{ fontSize: 18 }}> Log out </Text>
                     <Fontisto name="power" size={24} color="gray" />
                 </TouchableOpacity>
