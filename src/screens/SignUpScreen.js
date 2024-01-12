@@ -1,5 +1,6 @@
 import { appTheme } from "../colors";
 import React, { useState } from "react";
+import { baseUrl } from '../api/apiConfig';
 import InputCard from "../components/InputCard";
 import SubmitButton from "../components/SubmitButton";
 import BackArrowIcon from "../components/BackArrowIcon";
@@ -26,7 +27,8 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     const handlePolicy = () => {
-        Linking.openURL('https://portal.kaveri.group/privacy-policy')
+        const privacyPolicyLink = baseUrl + 'privacy-policy';
+        Linking.openURL(privacyPolicyLink);
     }
 
     return (

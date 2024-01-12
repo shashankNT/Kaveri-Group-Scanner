@@ -2,10 +2,11 @@ import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 import { appTheme } from '../colors'
 
-const InputCard = ({ placeholder, input, setInput }) => {
+const InputCard = ({ value='', placeholder, input, setInput }) => {
     return (
         <>
             <TextInput
+                value={value}
                 style={inputCardStyles.textInputContainer}
                 placeholder={placeholder}
                 selectionColor={appTheme.primaryColor}
@@ -19,7 +20,7 @@ export default InputCard
 
 export const inputCardStyles = StyleSheet.create({
     textInputContainer: {
-        width:'100%',
+        width: '100%',
         height: 50,
         backgroundColor: "white",
         alignItems: "center",

@@ -12,14 +12,14 @@ import { Image, View, StyleSheet, TextInput, Text, StatusBar, SafeAreaView } fro
 
 
 const LoginScreen = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('shashank.k@navtech.io');
+    const [password, setPassword] = useState('12345678');
     const [showPassword, setShowPassword] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleLogin = async () => {
 
-        const basicAuthValue = 'Basic ' + base64.encode('svisamsetty@navtech.io:1234567890');
+        const basicAuthValue = 'Basic ' + base64.encode(`${email}:${password}`);
 
         await AsyncStorage.setItem('basicAuth', basicAuthValue);
 

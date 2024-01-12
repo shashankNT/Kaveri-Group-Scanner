@@ -1,21 +1,24 @@
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react'
 import * as Print from "expo-print";
+import { appTheme } from '../colors';
+import { search } from '../api/apiConfig';
+import { useEffect, useState } from 'react'
+import { Ionicons } from '@expo/vector-icons';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import SummaryTable from '../components/SummaryTable'
 import DownloadSummary from '../components/DownloadSummary';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, SafeAreaView, StatusBar, ActivityIndicator, View } from 'react-native'
-import { appTheme } from '../colors';
 
 const ScannerSummaryScreen = ({ route, navigation }) => {
 
     const { lotNumber } = route.params;
+    const endPoint = search + lotNumber;
     const [lotData, setLotData] = useState();
     const [testReportPDF, setTestReportPDF] = useState();
     const [loader, setLoader] = useState(false);
+
 
     const getApiData = async () => {
         try {
@@ -23,7 +26,7 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
             setLoader(true);
 
             const credentials = await AsyncStorage.getItem('basicAuth');
-            const response = await axios.get(`https://portal.kaveri.group/search.json?lot_number=${lotNumber}`, { headers: { Authorization: credentials } });
+            const response = await axios.get(endPoint, { headers: { Authorization: credentials } });
 
             setLotData(response.data.test_report_items);
             setTestReportPDF(response.data.test_report_summary);
