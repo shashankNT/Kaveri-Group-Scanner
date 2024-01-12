@@ -5,7 +5,7 @@ import InputCard from "../components/InputCard";
 import SubmitButton from "../components/SubmitButton";
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 
-const ResetPasswordModal = ({ modalVisible, setModalVisible}) => {
+const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
 
     const [resetEmail, setResetEmail] = useState('');
 
@@ -25,7 +25,7 @@ const ResetPasswordModal = ({ modalVisible, setModalVisible}) => {
                             <Text style={{ fontSize: 16, fontWeight: 'bold', marginTop: 40 }}>Reset Password</Text>
                             <Text style={{ fontSize: 12, marginVertical: 20, paddingHorizontal: 30 }}>Please enter your email address to receive instructions on how to reset your password.</Text>
 
-                            <InputCard placeholder={"You Email"} input={resetEmail} setInput={setResetEmail} />
+                            <InputCard placeholder={"You Email"} setInput={setResetEmail} />
                             <SubmitButton text={'Reset Password'} onPress={handleResetPassword} />
 
                         </View>

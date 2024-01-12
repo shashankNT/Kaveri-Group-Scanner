@@ -41,7 +41,7 @@ const LoginScreen = ({ navigation }) => {
 
                 <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 20 }} > Sign In </Text>
 
-                <InputCard placeholder={'Your Email'} input={email} setInput={setEmail} />
+                <InputCard placeholder={'Your Email'} setInput={setEmail} />
 
                 <View style={inputCardStyles.textInputContainer}>
                     <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={() => setPassword(password)} secureTextEntry={!showPassword} />

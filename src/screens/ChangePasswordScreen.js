@@ -14,9 +14,9 @@ import { SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
 const ChangePasswordScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
-    const [currentPassowrd, setCurrentPassowrd] = useState('12345678');
-    const [newPassword, setNewPassword] = useState('12345678');
-    const [confirmPassword, setConfirmPassword] = useState('123456781');
+    const [currentPassowrd, setCurrentPassowrd] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const [modalVisible, setModalVisible] = useState(false);
     const [apiResponse, setApiResponse] = useState();
@@ -54,6 +54,8 @@ const ChangePasswordScreen = ({ navigation }) => {
                 },
             }
 
+            console.log(changePasswordObj);
+
             const response = await axios.put(changePassword, changePasswordObj, { headers: { Authorization: credentials, 'Content-Type': 'application/json' } });
 
             setLoader(false);
@@ -77,9 +79,10 @@ const ChangePasswordScreen = ({ navigation }) => {
                 <Text style={{ paddingBottom: 15, fontSize: 12, color: 'gray' }}>Enter your new password and confirm your password</Text>
 
                 <TextInput value={email} style={inputCardStyles.textInputContainer} editable={false} selectTextOnFocus={false} />
-                <InputCard input={currentPassowrd} setInput={setCurrentPassowrd} placeholder={'Current Password'} />
-                <InputCard input={newPassword} setInput={setNewPassword} placeholder={'New Password'} />
-                <InputCard input={confirmPassword} setInput={setConfirmPassword} placeholder={'Confirm New Password'} />
+
+                <InputCard setInput={setCurrentPassowrd} placeholder={'Current Password'} />
+                <InputCard setInput={setNewPassword} placeholder={'New Password'} />
+                <InputCard setInput={setConfirmPassword} placeholder={'Confirm New Password'} />
                 <SubmitButton text={'Apply'} onPress={handleSubmit} loader={loader} />
 
             </SafeAreaView>

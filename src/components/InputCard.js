@@ -2,15 +2,14 @@ import React from 'react'
 import { StyleSheet, TextInput } from 'react-native'
 import { appTheme } from '../colors'
 
-const InputCard = ({ value='', placeholder, input, setInput }) => {
+const InputCard = ({ placeholder, setInput }) => {
     return (
         <>
             <TextInput
-                value={value}
                 style={inputCardStyles.textInputContainer}
                 placeholder={placeholder}
                 selectionColor={appTheme.primaryColor}
-                onChangeText={() => setInput(input)}
+                onChangeText={(text) => setInput(text)}
             />
         </>
     )

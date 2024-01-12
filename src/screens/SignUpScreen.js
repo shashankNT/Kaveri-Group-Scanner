@@ -44,11 +44,11 @@ const SignUpScreen = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 40 }} > Sign Up </Text>
 
-               
-                <InputCard placeholder={'Name'} input={name} setInput={setName} />
-                <InputCard placeholder={'Your Email'} input={email} setInput={setEmail} />
-                <InputCard placeholder={'Password'} input={password} setInput={setPassword} />
-                <InputCard placeholder={'Phone Number'} input={phoneNumber} setInput={setPhoneNumber} />
+
+                <InputCard placeholder={'Name'} setInput={setName} />
+                <InputCard placeholder={'Your Email'} setInput={setEmail} />
+                <InputCard placeholder={'Password'} setInput={setPassword} />
+                <InputCard placeholder={'Phone Number'} setInput={setPhoneNumber} />
                 <Dropdown
                     style={styles.dropdown}
                     data={rolesData}

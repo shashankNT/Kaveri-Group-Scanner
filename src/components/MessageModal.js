@@ -15,7 +15,7 @@ const MessageModal = ({ apiResponse, modalVisible, setModalVisible }) => {
                                 ? <Text style={{ fontSize: 18 }}>Update Success!</Text>
                                 : <Text style={{ fontSize: 18 }}>Update Failed!</Text>
                             }
-                            <Text style={{ fontSize: 16, marginVertical: 20 }}>{apiResponse?.message}</Text>
+                            <Text style={{ fontSize: 12, marginTop: 20, marginBottom:15 }}>{apiResponse?.message}</Text>
                             <SubmitButton text={'Close'} onPress={() => setModalVisible(!modalVisible)} />
 
                         </View>
