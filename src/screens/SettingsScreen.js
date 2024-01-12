@@ -17,14 +17,6 @@ const SettingsScreen = ({ navigation }) => {
                 <Text style={{ paddingVertical: 20, fontSize: 20, fontWeight: 'bold' }}>Settings</Text>
 
                 <>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
-                        <Text style={{ fontSize: 16 }}> Country </Text>
-                        <Text style={{ fontSize: 16, color: 'gray', fontWeight: 500 }}> India </Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
-                        <Text style={{ fontSize: 16 }}> Currency </Text>
-                        <Text style={{ fontSize: 16, color: 'gray', fontWeight: 500 }}> ₹ INR </Text>
-                    </View>
                     <TouchableOpacity onPress={() => { navigation.navigate('ChangePasswordScreen') }} style={{ flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
                         <Text style={{ fontSize: 16 }}> Change Password </Text>
                         <Entypo name="chevron-right" size={24} color="gray" />
