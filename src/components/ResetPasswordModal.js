@@ -3,14 +3,40 @@ import React, { useState } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
 import SubmitButton from "../components/SubmitButton";
+import { forgetPassword } from '../api/apiConfig';
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
+import axios from "axios";
+import MessageModal from "./MessageModal";
 
 const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
 
-    const [resetEmail, setResetEmail] = useState('');
+    const [email, setEmail] = useState('');
+    const [loader, setLoader] = useState(false);
+    const [messageModal, setMessageModal] = useState(false);
+    const [apiResponse, setApiResponse] = useState();
 
     const handleResetPassword = async () => {
-        console.log('Reset Password => send email to', resetEmail);
+        setLoader(true);
+        try {
+            const forgetPasswordObj = {
+                user: {
+                    email: email
+                }
+            }
+
+            const response = await axios.post(forgetPassword, forgetPasswordObj);
+
+            setLoader(false);
+            setMessageModal(true);
+            setModalVisible(false);
+            setApiResponse(response?.data);
+
+        } catch (error) {
+            setLoader(false);
+            setMessageModal(true);
+            setModalVisible(false);
+            setApiResponse(error?.response?.data);
+        }
     }
 
     return (
@@ -25,13 +51,15 @@ const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
                             <Text style={{ fontSize: 16, fontWeight: 'bold', marginTop: 40 }}>Reset Password</Text>
                             <Text style={{ fontSize: 12, marginVertical: 20, paddingHorizontal: 30 }}>Please enter your email address to receive instructions on how to reset your password.</Text>
 
-                            <InputCard placeholder={"You Email"} setInput={setResetEmail} />
-                            <SubmitButton text={'Reset Password'} onPress={handleResetPassword} />
+                            <InputCard placeholder={"You Email"} setInput={setEmail} />
+                            <SubmitButton text={'Reset Password'} onPress={handleResetPassword} loader={loader} />
 
                         </View>
                     </SafeAreaView>
                 </TouchableWithoutFeedback>
             </Modal>
+            <MessageModal apiResponse={apiResponse} modalVisible={messageModal} setModalVisible={setMessageModal} />
+
         </>
     )
 }
