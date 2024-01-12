@@ -1,12 +1,15 @@
 import React from 'react'
 import { appTheme } from '../colors'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
-const SubmitButton = ({ text, onPress }) => {
+const SubmitButton = ({ text, onPress, loader = false }) => {
     return (
         <>
             <TouchableOpacity style={styles.submitButton} onPress={onPress}>
-                <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>{text}</Text>
+                {loader
+                    ? <ActivityIndicator size="large" color='white' />
+                    : <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>{text}</Text>
+                }
             </TouchableOpacity>
         </>
     )

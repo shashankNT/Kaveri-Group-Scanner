@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 import SubmitButton from './SubmitButton';
+import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 
 
 const MessageModal = ({ apiResponse, modalVisible, setModalVisible }) => {
@@ -11,14 +11,11 @@ const MessageModal = ({ apiResponse, modalVisible, setModalVisible }) => {
                     <SafeAreaView style={styles.centeredView}>
                         <View style={styles.modalView}>
 
-                            {
-                                apiResponse?.success
-                                    ? <Text style={{ fontSize: 18 }}>Update Success!</Text>
-                                    : <Text style={{ fontSize: 18 }}>Update Failed!</Text>
-
+                            {apiResponse?.success
+                                ? <Text style={{ fontSize: 18 }}>Update Success!</Text>
+                                : <Text style={{ fontSize: 18 }}>Update Failed!</Text>
                             }
-                            <Text style={{ fontSize: 16, marginVertical:20 }}>{apiResponse?.message}</Text>
-
+                            <Text style={{ fontSize: 16, marginVertical: 20 }}>{apiResponse?.message}</Text>
                             <SubmitButton text={'Close'} onPress={() => setModalVisible(!modalVisible)} />
 
                         </View>

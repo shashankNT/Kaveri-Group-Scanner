@@ -1,66 +1,70 @@
 import axios from 'axios';
 import { appTheme } from '../colors';
-import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import InputCard from '../components/InputCard';
 import { changePassword } from '../api/apiConfig';
+import React, { useEffect, useState } from 'react';
 import MessageModal from '../components/MessageModal'
 import SubmitButton from '../components/SubmitButton';
 import BackArrowIcon from '../components/BackArrowIcon';
-import { inputCardStyles } from '../components/InputCard'
-import { SafeAreaView, StyleSheet, Text, TextInput } from 'react-native'
+import { inputCardStyles } from '../components/InputCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import { SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
 
 const ChangePasswordScreen = ({ navigation }) => {
 
+    const [email, setEmail] = useState('');
     const [currentPassowrd, setCurrentPassowrd] = useState('12345678');
     const [newPassword, setNewPassword] = useState('12345678');
-    const [confirmPassword, setConfirmPassword] = useState('12345678');
+    const [confirmPassword, setConfirmPassword] = useState('123456781');
 
     const [modalVisible, setModalVisible] = useState(false);
     const [apiResponse, setApiResponse] = useState();
+    const [loader, setLoader] = useState(false);
+
+    useEffect(() => {
+        const getEmailFromStorage = async () => {
+            try {
+                const storedEmail = await AsyncStorage.getItem('email');
+                if (storedEmail !== null) {
+                    setEmail(storedEmail);
+                }
+            } catch (error) {
+                console.error('Error retrieving email from AsyncStorage:', error);
+            }
+        };
+
+        getEmailFromStorage();
+    }, []);
 
 
     const handleSubmit = async () => {
-
-        console.log('endPoint ==========>', changePassword === 'https://portal.kaveri.group/users.json');
-
-        const changePasswordObj = {
-            user: {
-                _method: 'put',
-                email: 'shashank.k@navtech.io',
-                current_password: currentPassowrd,
-                password: newPassword,
-                password_confirmation: confirmPassword,
-                commit: 'Update',
-            },
-        }
-        console.log('changePasswordObj', changePasswordObj.user);
-
+        setLoader(true);
         try {
+
             const credentials = await AsyncStorage.getItem('basicAuth');
-            console.log('credentials ========>', credentials === 'Basic c2hhc2hhbmsua0BuYXZ0ZWNoLmlvOjEyMzQ1Njc4');
+            const changePasswordObj = {
+                user: {
+                    _method: 'put',
+                    email: email,
+                    current_password: currentPassowrd,
+                    password: newPassword,
+                    password_confirmation: confirmPassword,
+                    commit: 'Update',
+                },
+            }
 
-            const response = await axios.put(
-                changePassword,
-                changePasswordObj,
-                { headers: { Authorization: credentials, 'Content-Type': 'application/json' } }
-            );
-            console.log('response', response);
-            setApiResponse(response.data)
+            const response = await axios.put(changePassword, changePasswordObj, { headers: { Authorization: credentials, 'Content-Type': 'application/json' } });
+
+            setLoader(false);
             setModalVisible(true);
+            setApiResponse(response?.data);
 
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            setLoader(false);
+            setModalVisible(true);
+            setApiResponse(error?.response?.data)
         }
-
-        //TODO
-        // modal to sow the message
-        // navigation to Home 
-
-        // navigation.goBack();
     }
 
     return (
@@ -72,11 +76,11 @@ const ChangePasswordScreen = ({ navigation }) => {
                 <Text style={{ paddingVertical: 14, fontSize: 20, fontWeight: 'bold' }}>Change Password</Text>
                 <Text style={{ paddingBottom: 15, fontSize: 12, color: 'gray' }}>Enter your new password and confirm your password</Text>
 
-                <TextInput style={inputCardStyles.textInputContainer} editable={false} selectTextOnFocus={false} />
+                <TextInput value={email} style={inputCardStyles.textInputContainer} editable={false} selectTextOnFocus={false} />
                 <InputCard input={currentPassowrd} setInput={setCurrentPassowrd} placeholder={'Current Password'} />
                 <InputCard input={newPassword} setInput={setNewPassword} placeholder={'New Password'} />
                 <InputCard input={confirmPassword} setInput={setConfirmPassword} placeholder={'Confirm New Password'} />
-                <SubmitButton text={'Apply'} onPress={handleSubmit} />
+                <SubmitButton text={'Apply'} onPress={handleSubmit} loader={loader} />
 
             </SafeAreaView>
 
