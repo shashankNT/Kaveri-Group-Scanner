@@ -153,17 +153,4 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
-    submitButton: {
-        height: 50,
-        width: "100%",
-        borderRadius: 50,
-        marginVertical: 15,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: appTheme.primaryColor,
-
-        shadowColor: "black",
-        shadowOpacity: 0.8,
-        elevation: 8,
-    }
 });

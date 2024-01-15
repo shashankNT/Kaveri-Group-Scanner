@@ -16,6 +16,8 @@ const LoginScreen = ({ navigation }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
+    const isDisabled = !(email && password);
+
     const handleLogin = async () => {
 
         const basicAuthValue = 'Basic ' + base64.encode(`${email}:${password}`);
@@ -49,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
                     }
                 </View>
 
-                <SubmitButton text={'Sign In'} onPress={handleLogin} />
+                <SubmitButton text={'Sign Up'} onPress={handleLogin} isDisabled={isDisabled} />
 
                 <Text style={styles.plainText} onPress={() => setModalVisible(!modalVisible)}> Forgot Password? </Text>
                 <Text style={styles.plainText}> Don't have an account? <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}> Sign Up </Text></Text>
