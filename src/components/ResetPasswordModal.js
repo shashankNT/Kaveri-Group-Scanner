@@ -1,12 +1,12 @@
+import axios from "axios";
 import { appTheme } from "../colors";
 import React, { useState } from 'react'
+import MessageModal from "./MessageModal";
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
-import SubmitButton from "../components/SubmitButton";
 import { forgetPassword } from '../api/apiConfig';
+import SubmitButton from "../components/SubmitButton";
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
-import axios from "axios";
-import MessageModal from "./MessageModal";
 
 const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
 
@@ -58,7 +58,7 @@ const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
                     </SafeAreaView>
                 </TouchableWithoutFeedback>
             </Modal>
-            <MessageModal apiResponse={apiResponse} modalVisible={messageModal} setModalVisible={setMessageModal} />
+            <MessageModal modalName={'Update'} apiResponse={apiResponse} modalVisible={messageModal} setModalVisible={setMessageModal} />
 
         </>
     )

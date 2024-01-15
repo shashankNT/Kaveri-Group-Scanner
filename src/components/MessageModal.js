@@ -3,22 +3,31 @@ import SubmitButton from './SubmitButton';
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 
 
-const MessageModal = ({ apiResponse, modalVisible, setModalVisible }) => {
+const MessageModal = ({ modalName = '', apiResponse, modalVisible, setModalVisible }) => {
     return (
         <>
             <Modal transparent={true} visible={modalVisible} onPress={() => setModalVisible(!modalVisible)}>
                 <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
                     <SafeAreaView style={styles.centeredView}>
-                        <View style={styles.modalView}>
 
-                            {apiResponse?.success
-                                ? <Text style={{ fontSize: 18 }}>Update Success!</Text>
-                                : <Text style={{ fontSize: 18 }}>Update Failed!</Text>
-                            }
-                            <Text style={{ fontSize: 12, marginTop: 20, marginBottom:15 }}>{apiResponse?.message}</Text>
-                            <SubmitButton text={'Close'} onPress={() => setModalVisible(!modalVisible)} />
+                        {apiResponse?.status === 500 ?
+                            <View style={[styles.modalView, { alignItems: 'center' }]}>
 
-                        </View>
+                                <Text style={{ fontSize: 16, marginTop: 20, marginBottom: 15 }}>{apiResponse?.error}</Text>
+                                <SubmitButton text={'Close'} onPress={() => setModalVisible(!modalVisible)} />
+
+                            </View>
+                            :
+                            <View style={styles.modalView}>
+                                {apiResponse?.success
+                                    ? <Text style={{ fontSize: 18 }}>{modalName} Success!</Text>
+                                    : <Text style={{ fontSize: 18 }}>{modalName} Failed!</Text>
+                                }
+                                <Text style={{ fontSize: 12, marginTop: 20, marginBottom: 15 }}>{apiResponse?.message}</Text>
+                                <SubmitButton text={'Close'} onPress={() => setModalVisible(!modalVisible)} />
+
+                            </View>
+                        }
                     </SafeAreaView>
                 </TouchableWithoutFeedback>
             </Modal>
