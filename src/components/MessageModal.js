@@ -1,17 +1,13 @@
 import React from 'react'
 import SubmitButton from './SubmitButton';
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 
-const MessageModal = ({ modalName = '', isLogout=false, buttonText='Close', apiResponse, modalVisible, setModalVisible }) => {
+const MessageModal = ({ modalName = '', buttonText = 'Close', apiResponse, modalVisible, setModalVisible }) => {
 
-    const navigation = useNavigation();
+    console.log(apiResponse);
 
     const handleLogOut = async () => {
-
         setModalVisible(!modalVisible);
-
     }
 
     return (

@@ -3,12 +3,11 @@ import { appTheme } from "../colors";
 import React, { useState } from "react";
 import { signUp } from '../api/apiConfig';
 import { baseUrl } from '../api/apiConfig';
-import InputCard from "../components/InputCard";
-import MessageModal from "../components/MessageModal";
-import SubmitButton from "../components/SubmitButton";
 import BackArrowIcon from "../components/BackArrowIcon";
 import { Dropdown } from 'react-native-element-dropdown';
-import { Image, View, Text, SafeAreaView, Linking, ScrollView, StyleSheet } from "react-native";
+import SignUpMessageModal from "../components/SignUpMessageModal";
+import InputCard, { inputCardStyles } from "../components/InputCard";
+import { Image, View, Text, SafeAreaView, Linking, ScrollView, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -29,6 +28,8 @@ const SignUpScreen = ({ navigation }) => {
     const [apiResponse, setApiResponse] = useState();
     const [loader, setLoader] = useState(false);
 
+    const isDisabled = !(name && email && password && phoneNumber);
+
     const handleSignUp = async () => {
         setLoader(true);
         try {
@@ -45,11 +46,16 @@ const SignUpScreen = ({ navigation }) => {
 
             const response = await axios.post(signUp, signUpObj);
 
+            // console.log('response', response?.data);
+
             setLoader(false);
             setModalVisible(true);
             setApiResponse(response?.data);
 
+
         } catch (error) {
+
+            // console.log('error', error?.response?.data);
 
             setLoader(false);
             setModalVisible(true);
@@ -81,7 +87,14 @@ const SignUpScreen = ({ navigation }) => {
                     <InputCard placeholder={'Name'} setInput={setName} />
                     <InputCard placeholder={'Your Email'} setInput={setEmail} />
                     <InputCard placeholder={'Password'} setInput={setPassword} />
-                    <InputCard placeholder={'Phone Number'} setInput={setPhoneNumber} />
+                    <TextInput
+                        style={inputCardStyles.textInputContainer}
+                        placeholder='Phone Number'
+                        keyboardType='numeric'
+                        setInput={setPhoneNumber}
+                        selectionColor={appTheme.primaryColor}
+                        onChangeText={(text) => setPhoneNumber(text)}
+                    />
                     <Dropdown
                         style={styles.dropdown}
                         data={rolesData}
@@ -94,7 +107,17 @@ const SignUpScreen = ({ navigation }) => {
                         }}
                     />
 
-                    <SubmitButton text={'Sign up'} onPress={handleSignUp} loader={loader} />
+                    <TouchableOpacity
+                        disabled={isDisabled}
+                        onPress={handleSignUp}
+                        style={[styles.submitButton, isDisabled && { backgroundColor: '#9a9a9a' }]}
+                    >
+                        {loader
+                            ? <ActivityIndicator size="large" color='white' />
+                            : <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Apply</Text>
+                        }
+                    </TouchableOpacity>
+
 
                     <View style={{ alignItems: 'center' }}>
                         <Text style={{ fontSize: 10, color: 'gray' }}>By signing in you agreet to our</Text>
@@ -106,14 +129,12 @@ const SignUpScreen = ({ navigation }) => {
 
             </SafeAreaView>
 
-            <MessageModal modalName={'Sign up'} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <SignUpMessageModal apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
         </>
-
     )
 }
 
-export default SignUpScreen
-
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
 
@@ -141,4 +162,17 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
+    submitButton: {
+        height: 50,
+        width: "100%",
+        borderRadius: 50,
+        marginVertical: 15,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: appTheme.primaryColor,
+
+        shadowColor: "black",
+        shadowOpacity: 0.8,
+        elevation: 8,
+    }
 });
