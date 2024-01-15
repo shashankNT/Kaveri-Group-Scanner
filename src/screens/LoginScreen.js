@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <>
-            <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, padding: 20, flex: 1 }}>
+            <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, paddingVertical: 40, paddingHorizontal: 20, flex: 1 }}>
 
                 <View style={{ alignItems: "center", marginTop: 50, marginBottom: 30 }}>
                     <View style={{ height: 120, borderRadius: 10, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>

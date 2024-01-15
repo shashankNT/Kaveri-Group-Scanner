@@ -1,19 +1,16 @@
 import axios from "axios";
 import { appTheme } from "../colors";
-import React, { useState } from 'react'
-import MessageModal from "./MessageModal";
+import React, { useEffect, useState } from 'react'
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
 import { forgetPassword } from '../api/apiConfig';
-import SubmitButton from "../components/SubmitButton";
-import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableOpacity, ActivityIndicator } from "react-native";
 
 const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState();
     const [loader, setLoader] = useState(false);
-    const [messageModal, setMessageModal] = useState(false);
-    const [apiResponse, setApiResponse] = useState();
+    const [apiResponse, setApiResponse] = useState({ statusCode: 0, message: '' });
 
     const handleResetPassword = async () => {
         setLoader(true);
@@ -27,39 +24,65 @@ const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
             const response = await axios.post(forgetPassword, forgetPasswordObj);
 
             setLoader(false);
-            setMessageModal(true);
-            setModalVisible(false);
-            setApiResponse(response?.data);
+            setApiResponse({ statusCode: response?.status, message: response?.data?.message });
 
         } catch (error) {
+
             setLoader(false);
-            setMessageModal(true);
-            setModalVisible(false);
-            setApiResponse(error?.response?.data);
+            setApiResponse({ statusCode: error?.response?.status, message: error?.response?.data?.message });
+
         }
     }
+
+    const handleCloseModal = () => {
+        setModalVisible(!modalVisible);
+    }
+
+    useEffect(() => {
+        setApiResponse();
+        setLoader(false);
+    }, [email]);
 
     return (
         <>
             <Modal transparent={true} visible={modalVisible} onPress={() => setModalVisible(!modalVisible)}>
-                <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
-                    <SafeAreaView style={styles.centeredView}>
-                        <View style={styles.modalView}>
+                <SafeAreaView style={styles.centeredView}>
+                    <View style={styles.modalView}>
 
-                            <Ionicons onPress={() => setModalVisible(!modalVisible)} style={{ position: 'absolute', right: 12, top: 12, }} name="close" size={30} color={appTheme.primaryColor} />
+                        <Ionicons onPress={() => setModalVisible(!modalVisible)} style={{ position: 'absolute', right: 12, top: 12, }} name="close" size={30} color={appTheme.primaryColor} />
 
-                            <Text style={{ fontSize: 16, fontWeight: 'bold', marginTop: 40 }}>Reset Password</Text>
-                            <Text style={{ fontSize: 12, marginVertical: 20, paddingHorizontal: 30 }}>Please enter your email address to receive instructions on how to reset your password.</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', marginTop: 40 }}>Reset Password</Text>
+                        <Text style={{ fontSize: 12, marginVertical: 20, paddingHorizontal: 30 }}>Please enter your email address to receive instructions on how to reset your password.</Text>
 
-                            <InputCard placeholder={"You Email"} setInput={setEmail} />
-                            <SubmitButton text={'Reset Password'} onPress={handleResetPassword} loader={loader} />
+                        {apiResponse?.statusCode === 200 && <Text style={{ textAlign: 'center', color: 'green', fontSize: 18 }}>{apiResponse?.message}</Text>}
+                        {apiResponse?.statusCode === 500 && <Text style={{ textAlign: 'center', color: 'red' }}>{apiResponse?.message}</Text>}
 
-                        </View>
-                    </SafeAreaView>
-                </TouchableWithoutFeedback>
+                        <InputCard placeholder={"You Email"} setInput={setEmail} />
+
+                        {apiResponse?.statusCode === 200
+                            ?
+                            <TouchableOpacity onPress={handleCloseModal} style={styles.submitButton}>
+                                {loader
+                                    ? <ActivityIndicator size="large" color='white' />
+                                    : <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Close</Text>
+                                }
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity
+                                onPress={handleResetPassword}
+                                disabled={email ? false : true}
+                                style={[styles.submitButton, !email && { backgroundColor: '#9a9a9a' },]}
+                            >
+                                {loader
+                                    ? <ActivityIndicator size="large" color='white' />
+                                    : <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Reset Password</Text>
+                                }
+                            </TouchableOpacity>
+                        }
+
+                    </View>
+                </SafeAreaView>
             </Modal>
-            <MessageModal modalName={'Update'} apiResponse={apiResponse} modalVisible={messageModal} setModalVisible={setMessageModal} />
-
         </>
     )
 }
@@ -80,5 +103,20 @@ const styles = StyleSheet.create({
         width: '90%',
         backgroundColor: 'white',
         alignItems: 'center',
-    }
+    },
+
+    submitButton: {
+        height: 50,
+        width: "100%",
+        borderRadius: 50,
+        marginVertical: 15,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: appTheme.primaryColor,
+
+        shadowColor: "black",
+        shadowOpacity: 0.8,
+        elevation: 8,
+    },
+
 });

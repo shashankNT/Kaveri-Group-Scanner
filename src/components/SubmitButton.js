@@ -2,10 +2,10 @@ import React from 'react'
 import { appTheme } from '../colors'
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
-const SubmitButton = ({ text, onPress, loader = false }) => {
+const SubmitButton = ({ text, onPress, loader = false, isDisabled = false }) => {
     return (
         <>
-            <TouchableOpacity style={styles.submitButton} onPress={onPress}>
+            <TouchableOpacity style={[styles.submitButton, isDisabled && { backgroundColor: '#9a9a9a' },]} onPress={onPress} disabled={isDisabled}>
                 {loader
                     ? <ActivityIndicator size="large" color='white' />
                     : <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>{text}</Text>
