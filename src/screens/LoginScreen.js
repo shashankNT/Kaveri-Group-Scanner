@@ -12,14 +12,17 @@ import { Image, View, StyleSheet, TextInput, Text, StatusBar, SafeAreaView } fro
 
 
 const LoginScreen = ({ navigation }) => {
-    const [email, setEmail] = useState('shashank.k@navtech.io');
-    const [password, setPassword] = useState('12345678');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleLogin = async () => {
 
+        console.log(email, password);
+
         const basicAuthValue = 'Basic ' + base64.encode(`${email}:${password}`);
+        console.log(basicAuthValue);
 
         await AsyncStorage.setItem('basicAuth', basicAuthValue);
         await AsyncStorage.setItem('email', email);
@@ -44,7 +47,7 @@ const LoginScreen = ({ navigation }) => {
                 <InputCard placeholder={'Your Email'} setInput={setEmail} />
 
                 <View style={inputCardStyles.textInputContainer}>
-                    <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={() => setPassword(password)} secureTextEntry={!showPassword} />
+                    <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={(text) => setPassword(text)} secureTextEntry={!showPassword} />
                     {showPassword
                         ? <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye" size={24} />
                         : <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye-off" size={24} />
