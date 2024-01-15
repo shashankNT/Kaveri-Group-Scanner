@@ -1,8 +1,10 @@
+import axios from "axios";
 import { appTheme } from "../colors";
-import React, { useState } from "react";
 import base64 from 'react-native-base64';
+import { search } from '../api/apiConfig';
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
+import React, { useEffect, useState } from "react";
 import SubmitButton from "../components/SubmitButton";
 import { inputCardStyles } from '../components/InputCard'
 import ResetPasswordModal from "../components/ResetPasswordModal";
@@ -11,10 +13,33 @@ import { Image, View, StyleSheet, TextInput, Text, SafeAreaView } from "react-na
 
 
 const LoginScreen = ({ navigation }) => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [forgetPasswordModal, setForgetPasswordModal] = useState(false);
+
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loader, setLoader] = useState(false);
+
+    const validateLoginCredentials = async (basicToken) => {
+
+        setLoader(true);
+        try {
+            const endPoint = search + '23KE30401';
+            await axios.get(endPoint, { headers: { Authorization: basicToken } });
+
+            setLoader(false);
+            setErrorMessage('');
+            navigation.navigate('Home');
+
+        } catch (error) {
+            if (error?.response.status === 401) {
+                setErrorMessage(error?.response?.data?.error);
+                setLoader(false);
+            }
+        }
+    }
 
     const handleLogin = async () => {
 
@@ -23,8 +48,13 @@ const LoginScreen = ({ navigation }) => {
         await AsyncStorage.setItem('basicAuth', basicAuthValue);
         await AsyncStorage.setItem('email', email);
 
-        navigation.navigate('Home');
+        validateLoginCredentials(basicAuthValue);
+
     };
+
+    useEffect(() => {
+        setErrorMessage('');
+    }, [email, password]);
 
 
     return (
@@ -49,13 +79,15 @@ const LoginScreen = ({ navigation }) => {
                     }
                 </View>
 
-                <SubmitButton text={'Sign In'} onPress={handleLogin} />
+                <Text style={{ textAlign: 'center', color: 'red', paddingTop: 8 }} >{errorMessage}</Text>
 
-                <Text style={styles.plainText} onPress={() => setModalVisible(!modalVisible)}> Forgot Password? </Text>
+                <SubmitButton text={'Sign In'} onPress={handleLogin} loader={loader} />
+
+                <Text style={styles.plainText} onPress={() => setForgetPasswordModal(!forgetPasswordModal)}> Forgot Password? </Text>
                 <Text style={styles.plainText}> Don't have an account? <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}> Sign Up </Text></Text>
 
             </SafeAreaView>
-            <ResetPasswordModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <ResetPasswordModal modalVisible={forgetPasswordModal} setModalVisible={setForgetPasswordModal} />
         </>
 
     );
