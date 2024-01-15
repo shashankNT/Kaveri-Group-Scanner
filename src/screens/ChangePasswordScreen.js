@@ -8,8 +8,8 @@ import MessageModal from '../components/MessageModal'
 import SubmitButton from '../components/SubmitButton';
 import BackArrowIcon from '../components/BackArrowIcon';
 import { inputCardStyles } from '../components/InputCard';
+import { SafeAreaView, Text, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
 
 const ChangePasswordScreen = ({ navigation }) => {
 
@@ -54,8 +54,6 @@ const ChangePasswordScreen = ({ navigation }) => {
                 },
             }
 
-            console.log(changePasswordObj);
-
             const response = await axios.put(changePassword, changePasswordObj, { headers: { Authorization: credentials, 'Content-Type': 'application/json' } });
 
             setLoader(false);
@@ -65,7 +63,7 @@ const ChangePasswordScreen = ({ navigation }) => {
         } catch (error) {
             setLoader(false);
             setModalVisible(true);
-            setApiResponse(error?.response?.data)
+            setApiResponse(error?.response?.data);
         }
     }
 
@@ -87,7 +85,7 @@ const ChangePasswordScreen = ({ navigation }) => {
 
             </SafeAreaView>
 
-            <MessageModal modalName={'Update'} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <MessageModal modalName={'Update'} isLogout={true} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
 
         </>
 

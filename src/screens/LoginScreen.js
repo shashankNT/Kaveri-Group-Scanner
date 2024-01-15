@@ -19,10 +19,7 @@ const LoginScreen = ({ navigation }) => {
 
     const handleLogin = async () => {
 
-        console.log(email, password);
-
         const basicAuthValue = 'Basic ' + base64.encode(`${email}:${password}`);
-        console.log(basicAuthValue);
 
         await AsyncStorage.setItem('basicAuth', basicAuthValue);
         await AsyncStorage.setItem('email', email);

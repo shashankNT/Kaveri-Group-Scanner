@@ -1,9 +1,23 @@
 import React from 'react'
 import SubmitButton from './SubmitButton';
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 
+const MessageModal = ({ modalName = '', isLogout=false, apiResponse, modalVisible, setModalVisible }) => {
 
-const MessageModal = ({ modalName = '', apiResponse, modalVisible, setModalVisible }) => {
+    const navigation = useNavigation();
+
+    const handleLogOut = async () => {
+
+        setModalVisible(!modalVisible);
+
+        if (isLogout) {
+            await AsyncStorage.removeItem('basicAuth');
+            navigation.navigate('LoginScreen');
+        }
+    }
+
     return (
         <>
             <Modal transparent={true} visible={modalVisible} onPress={() => setModalVisible(!modalVisible)}>
@@ -24,7 +38,7 @@ const MessageModal = ({ modalName = '', apiResponse, modalVisible, setModalVisib
                                     : <Text style={{ fontSize: 18 }}>{modalName} Failed!</Text>
                                 }
                                 <Text style={{ fontSize: 12, marginTop: 20, marginBottom: 15 }}>{apiResponse?.message}</Text>
-                                <SubmitButton text={'Close'} onPress={() => setModalVisible(!modalVisible)} />
+                                <SubmitButton text={'Log out'} onPress={handleLogOut} />
 
                             </View>
                         }

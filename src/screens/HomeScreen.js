@@ -8,7 +8,7 @@ import { Platform, SafeAreaView, Text, TextInput, StatusBar, View } from 'react-
 
 const HomeScreen = ({ navigation }) => {
 
-    const [lotNumber, setLotNumber] = useState('23KE30501');
+    const [lotNumber, setLotNumber] = useState('');
 
     const handleSearch = () => {
         navigation.navigate('ScannerSummaryScreen', { lotNumber: lotNumber });
@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
                 <SubmitButton text={'Scan Barcode / QR Code'} onPress={() => navigation.navigate('ScannerScreen')} />
 
                 <View style={inputCardStyles.textInputContainer}>
-                    <TextInput value='23KE30501' placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={() => setLotNumber(lotNumber)} />
+                    <TextInput placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={() => setLotNumber(lotNumber)} />
                     <Ionicons onPress={handleSearch} style={{ paddingRight: 15, color: appTheme.primaryColor }} name="search-sharp" size={24} />
                 </View>
 

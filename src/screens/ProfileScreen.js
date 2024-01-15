@@ -29,7 +29,7 @@ const ProfileScreen = ({ navigation }) => {
                     <Text style={{ fontSize: 18 }}> Settings </Text>
                     <Ionicons name="settings-sharp" size={24} color="gray" />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => { console.log('hu'); setModalVisible(!modalVisible) }} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
+                <TouchableOpacity onPress={() => { setModalVisible(!modalVisible) }} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
                     <Text style={{ fontSize: 18 }}> Log out </Text>
                     <Fontisto name="power" size={24} color="gray" />
                 </TouchableOpacity>

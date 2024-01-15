@@ -55,7 +55,7 @@ const SignUpScreen = ({ navigation }) => {
             setModalVisible(true);
             setApiResponse(error?.response?.data)
         }
-        navigation.navigate('LoginScreen');
+        
     };
 
     const handlePolicy = () => {
