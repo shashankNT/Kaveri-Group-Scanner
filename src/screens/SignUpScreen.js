@@ -8,6 +8,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import SignUpMessageModal from "../components/SignUpMessageModal";
 import InputCard, { inputCardStyles } from "../components/InputCard";
 import { Image, View, Text, SafeAreaView, Linking, ScrollView, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
+import SubmitButton from "../components/SubmitButton";
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -107,17 +108,7 @@ const SignUpScreen = ({ navigation }) => {
                         }}
                     />
 
-                    <TouchableOpacity
-                        disabled={isDisabled}
-                        onPress={handleSignUp}
-                        style={[styles.submitButton, isDisabled && { backgroundColor: '#9a9a9a' }]}
-                    >
-                        {loader
-                            ? <ActivityIndicator size="large" color='white' />
-                            : <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Apply</Text>
-                        }
-                    </TouchableOpacity>
-
+                    <SubmitButton text={'Sign Up'} onPress={handleSignUp} isDisabled={isDisabled} loader={loader}/>
 
                     <View style={{ alignItems: 'center' }}>
                         <Text style={{ fontSize: 10, color: 'gray' }}>By signing in you agreet to our</Text>
