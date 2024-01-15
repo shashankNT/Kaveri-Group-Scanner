@@ -8,7 +8,7 @@ import MessageModal from "../components/MessageModal";
 import SubmitButton from "../components/SubmitButton";
 import BackArrowIcon from "../components/BackArrowIcon";
 import { Dropdown } from 'react-native-element-dropdown';
-import { Image, View, Text, SafeAreaView, StatusBar, Linking, ScrollView, StyleSheet } from "react-native";
+import { Image, View, Text, SafeAreaView, Linking, ScrollView, StyleSheet } from "react-native";
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -42,7 +42,7 @@ const SignUpScreen = ({ navigation }) => {
                     password: password
                 },
             }
-            
+
             const response = await axios.post(signUp, signUpObj);
 
             setLoader(false);
@@ -55,7 +55,7 @@ const SignUpScreen = ({ navigation }) => {
             setModalVisible(true);
             setApiResponse(error?.response?.data)
         }
-        
+
     };
 
     const handlePolicy = () => {
@@ -65,7 +65,7 @@ const SignUpScreen = ({ navigation }) => {
 
     return (
         <>
-            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
+            <SafeAreaView style={{ paddingHorizontal: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
                 <BackArrowIcon navigation={navigation} />
 
                 <View style={{ alignItems: "center", marginTop: 20 }}>
@@ -106,7 +106,7 @@ const SignUpScreen = ({ navigation }) => {
 
             </SafeAreaView>
 
-            <MessageModal modalName={'Sign up'} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+            <MessageModal modalName={'Sign up'} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
 
     )

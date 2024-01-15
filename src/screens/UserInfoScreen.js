@@ -1,7 +1,6 @@
 import React from 'react'
 import { appTheme } from '../colors';
 import { Text, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar'
 import UserAvatar from 'react-native-user-avatar';
 import BackArrowIcon from '../components/BackArrowIcon'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -10,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 const UserInfoScreen = ({ navigation }) => {
     return (
         <>
-            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, paddingHorizontal: 20, flex: 1 }}>
+            <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, paddingHorizontal: 20, flex: 1 }}>
                 <BackArrowIcon navigation={navigation} />
 
                 <View style={{ alignItems: "center", marginVertical: 30 }}>

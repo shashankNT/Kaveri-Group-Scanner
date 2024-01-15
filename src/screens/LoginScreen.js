@@ -4,11 +4,10 @@ import base64 from 'react-native-base64';
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
 import SubmitButton from "../components/SubmitButton";
-import BackArrowIcon from "../components/BackArrowIcon";
 import { inputCardStyles } from '../components/InputCard'
 import ResetPasswordModal from "../components/ResetPasswordModal";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Image, View, StyleSheet, TextInput, Text, StatusBar, SafeAreaView } from "react-native";
+import { Image, View, StyleSheet, TextInput, Text, SafeAreaView } from "react-native";
 
 
 const LoginScreen = ({ navigation }) => {
@@ -30,8 +29,7 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <>
-            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, padding: 20, flex: 1 }}>
-                <BackArrowIcon navigation={navigation} />
+            <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, padding: 20, flex: 1 }}>
 
                 <View style={{ alignItems: "center", marginTop: 50, marginBottom: 30 }}>
                     <View style={{ height: 120, borderRadius: 10, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>

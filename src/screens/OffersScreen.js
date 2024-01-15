@@ -1,7 +1,7 @@
 import { appTheme } from '../colors';
 import React, { useState, useCallback } from 'react'
 import TabBarButton from '../components/TabBarButton';
-import { RefreshControl, SafeAreaView, ScrollView, StatusBar, Text, View } from 'react-native';
+import { RefreshControl, SafeAreaView, ScrollView, Text, View } from 'react-native';
 
 
 const OffersScreen = ({ navigation }) => {
@@ -16,7 +16,7 @@ const OffersScreen = ({ navigation }) => {
     }, []);
 
     return (
-        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
+        <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, flex: 1 }}>
             <ScrollView
                 contentContainerStyle={{ flex: 1, justifyContent: 'center' }}
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}

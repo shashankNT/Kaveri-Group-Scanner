@@ -4,7 +4,7 @@ import UserAvatar from 'react-native-user-avatar';
 import TabBarButton from '../components/TabBarButton';
 import { Ionicons, Fontisto } from '@expo/vector-icons';
 import LogoutWarningModal from '../components/LogoutWarningModal';
-import { Text, View, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 
 
 const ProfileScreen = ({ navigation }) => {
@@ -13,7 +13,7 @@ const ProfileScreen = ({ navigation }) => {
 
     return (
         <>
-            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
+            <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, flex: 1 }}>
 
                 <TouchableOpacity onPress={() => navigation.navigate('UserInfoScreen')} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 20, marginBottom: 6, alignItems: 'center' }} >
                     <View>

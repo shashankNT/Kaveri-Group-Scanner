@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Entypo, Fontisto } from "@expo/vector-icons";
 import BackArrowIcon from '../components/BackArrowIcon';
 import LogoutWarningModal from '../components/LogoutWarningModal';
-import { SafeAreaView, StatusBar, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
 
 const SettingsScreen = ({ navigation }) => {
 
@@ -11,7 +11,7 @@ const SettingsScreen = ({ navigation }) => {
 
     return (
         <>
-            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, paddingHorizontal: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
+            <SafeAreaView style={{ paddingHorizontal: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
                 <BackArrowIcon navigation={navigation} />
 
                 <Text style={{ paddingVertical: 20, fontSize: 20, fontWeight: 'bold' }}>Settings</Text>

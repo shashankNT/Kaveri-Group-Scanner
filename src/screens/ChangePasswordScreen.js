@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { appTheme } from '../colors';
-import { StatusBar } from 'expo-status-bar'
 import InputCard from '../components/InputCard';
 import { changePassword } from '../api/apiConfig';
 import React, { useEffect, useState } from 'react';
@@ -69,7 +68,7 @@ const ChangePasswordScreen = ({ navigation }) => {
 
     return (
         <>
-            <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, padding: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
+            <SafeAreaView style={{ padding: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
 
                 <BackArrowIcon navigation={navigation} />
 

@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import TabBarButton from '../components/TabBarButton'
 import SubmitButton from '../components/SubmitButton';
 import { inputCardStyles } from '../components/InputCard';
-import { Platform, SafeAreaView, Text, TextInput, StatusBar, View } from 'react-native';
+import { SafeAreaView, Text, TextInput, View } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
 
@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
+        <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, flex: 1 }}>
 
             <Text style={{ textAlign: 'center', paddingVertical: 20, fontSize: 20, fontWeight: 600 }}>Home</Text>
 
