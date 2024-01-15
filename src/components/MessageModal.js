@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 
-const MessageModal = ({ modalName = '', isLogout=false, apiResponse, modalVisible, setModalVisible }) => {
+const MessageModal = ({ modalName = '', isLogout=false, buttonText='Close', apiResponse, modalVisible, setModalVisible }) => {
 
     const navigation = useNavigation();
 
@@ -28,7 +28,7 @@ const MessageModal = ({ modalName = '', isLogout=false, apiResponse, modalVisibl
                             <View style={[styles.modalView, { alignItems: 'center' }]}>
 
                                 <Text style={{ fontSize: 16, marginTop: 20, marginBottom: 15 }}>{apiResponse?.error}</Text>
-                                <SubmitButton text={'Close'} onPress={() => setModalVisible(!modalVisible)} />
+                                <SubmitButton text={buttonText} onPress={() => setModalVisible(!modalVisible)} />
 
                             </View>
                             :
@@ -38,7 +38,7 @@ const MessageModal = ({ modalName = '', isLogout=false, apiResponse, modalVisibl
                                     : <Text style={{ fontSize: 18 }}>{modalName} Failed!</Text>
                                 }
                                 <Text style={{ fontSize: 12, marginTop: 20, marginBottom: 15 }}>{apiResponse?.message}</Text>
-                                <SubmitButton text={'Log out'} onPress={handleLogOut} />
+                                <SubmitButton text={buttonText} onPress={handleLogOut} />
 
                             </View>
                         }

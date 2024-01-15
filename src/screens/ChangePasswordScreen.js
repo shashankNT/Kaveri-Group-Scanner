@@ -85,7 +85,7 @@ const ChangePasswordScreen = ({ navigation }) => {
 
             </SafeAreaView>
 
-            <MessageModal modalName={'Update'} isLogout={true} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <MessageModal modalName={'Update'} isLogout={true}  buttonText={'Log out'} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
 
         </>
 
