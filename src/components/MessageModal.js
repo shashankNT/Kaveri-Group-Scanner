@@ -12,10 +12,6 @@ const MessageModal = ({ modalName = '', isLogout=false, buttonText='Close', apiR
 
         setModalVisible(!modalVisible);
 
-        if (isLogout) {
-            await AsyncStorage.removeItem('basicAuth');
-            navigation.navigate('LoginScreen');
-        }
     }
 
     return (

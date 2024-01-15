@@ -71,7 +71,7 @@ const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
                             <TouchableOpacity
                                 onPress={handleResetPassword}
                                 disabled={email ? false : true}
-                                style={[styles.submitButton, !email && { backgroundColor: '#9a9a9a' },]}
+                                style={[styles.submitButton, !email && { backgroundColor: '#9a9a9a' }]}
                             >
                                 {loader
                                     ? <ActivityIndicator size="large" color='white' />
