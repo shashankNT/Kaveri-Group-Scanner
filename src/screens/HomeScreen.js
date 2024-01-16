@@ -10,8 +10,9 @@ const HomeScreen = ({ navigation }) => {
 
     const [lotNumber, setLotNumber] = useState('');
 
-    const handleSearch = () => {
-        navigation.navigate('ScannerSummaryScreen', { lotNumber: lotNumber });
+    const handleSearch = (lotNo) => {
+        if (!lotNo) return;
+        navigation.navigate('ScannerSummaryScreen', { lotNumber: lotNo });
     }
 
     return (
@@ -24,11 +25,10 @@ const HomeScreen = ({ navigation }) => {
                 <SubmitButton text={'Scan Barcode / QR Code'} onPress={() => navigation.navigate('ScannerScreen')} />
 
                 <View style={inputCardStyles.textInputContainer}>
-                    <TextInput placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={() => setLotNumber(lotNumber)} />
-                    <Ionicons onPress={handleSearch} style={{ paddingRight: 15, color: appTheme.primaryColor }} name="search-sharp" size={24} />
+                    <TextInput placeholder='Scan or enter your Bale Number' selectionColor={appTheme.primaryColor} style={{ flex: 1, borderRadius: 60, textAlign: 'center', paddingLeft: 20 }} onChangeText={(text) => setLotNumber(text)} />
+                    <Ionicons onPress={() => handleSearch(lotNumber)} style={{ paddingRight: 15, color: appTheme.primaryColor }} name="search-sharp" size={24} />
                 </View>
 
-                {/* <Text style={{ paddingTop: 30,  fontWeight: 700, fontSize: 22 }}>Recent Searches</Text> */}
             </View>
 
             <TabBarButton activeTab='Home' navigation={navigation} />
