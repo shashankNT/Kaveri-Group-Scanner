@@ -14,8 +14,6 @@ import { Text, SafeAreaView, ActivityIndicator, View } from "react-native";
 const ScannerSummaryScreen = ({ route, navigation }) => {
     const { lotNumber } = route.params;
 
-    console.log(lotNumber);
-
     const endPoint = search + lotNumber;
     const [lotData, setLotData] = useState();
     const [testReportPDF, setTestReportPDF] = useState();

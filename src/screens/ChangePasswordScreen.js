@@ -23,8 +23,6 @@ const ChangePasswordScreen = ({ navigation, route }) => {
 
     const isDisabled = !(currentPassowrd && newPassword && confirmPassword);
 
-    console.log(isDisabled);
-
     const handleSubmit = async () => {
         setLoader(true);
         try {
