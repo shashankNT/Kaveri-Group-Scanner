@@ -1,32 +1,13 @@
-import axios from 'axios';
 import { appTheme } from '../colors';
 import { Text, View } from 'react-native';
-import { getUserData } from '../api/apiConfig';
 import UserAvatar from 'react-native-user-avatar';
-import React, { useEffect, useState } from 'react';
 import BackArrowIcon from '../components/BackArrowIcon'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const UserInfoScreen = ({ navigation }) => {
+const UserInfoScreen = ({ navigation, route }) => {
 
-    const [userInfo, setUserInfo] = useState();
-
-    const getUserInfo = async () => {
-        try {
-            const credentials = await AsyncStorage.getItem('basicAuth');
-            const response = await axios.get(getUserData, { headers: { Authorization: credentials } });
-            setUserInfo(response?.data);
-        } catch (error) {
-            console.error("error", error);
-        }
-    }
-
-    useEffect(() => {
-        getUserInfo();
-    }, [])
-
+    const { userInfo } = route.params;
 
     return (
         <>
