@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
             }
 
         } catch (error) {
-            
+
             if (error?.response?.status === 401 || error?.response?.status === 403) {
                 setErrorMessage(error?.response?.data?.error);
                 setLoader(false);
@@ -87,7 +87,7 @@ const LoginScreen = ({ navigation }) => {
 
                 <Text style={{ textAlign: 'center', color: '#C12721', paddingTop: 8 }} >{errorMessage}</Text>
 
-                <SubmitButton text={'Sign Up'} onPress={handleLogin} isDisabled={isDisabled} loader={loader} />
+                <SubmitButton text={'Sign In'} onPress={handleLogin} isDisabled={isDisabled} loader={loader} />
 
                 <Text style={styles.plainText} onPress={() => setModalVisible(!modalVisible)}> Forgot Password? </Text>
                 <Text style={styles.plainText}> Don't have an account? <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}> Sign Up </Text></Text>

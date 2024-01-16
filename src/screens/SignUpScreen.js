@@ -115,7 +115,7 @@ const SignUpScreen = ({ navigation }) => {
                         <Text onPress={handlePolicy} style={{ fontSize: 10, color: 'gray', textDecorationLine: 'underline' }}>Terms & Privacy Policy.</Text>
                     </View>
 
-                    <Text style={{ textAlign: 'center', color: 'gray', marginVertical: 25 }}> Already have account?. <Text onPress={() => { navigation.navigate('LoginScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign In</Text> </Text>
+                    <Text style={{ textAlign: 'center', color: 'gray', marginVertical: 25 }}> Already have account? <Text onPress={() => { navigation.navigate('LoginScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign In</Text> </Text>
                 </ScrollView>
 
             </SafeAreaView>
