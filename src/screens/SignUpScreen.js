@@ -94,6 +94,7 @@ const SignUpScreen = ({ navigation }) => {
                         keyboardType='numeric'
                         setInput={setPhoneNumber}
                         selectionColor={appTheme.primaryColor}
+                        maxLength={10}
                         onChangeText={(text) => setPhoneNumber(text)}
                     />
                     <Dropdown
@@ -108,7 +109,7 @@ const SignUpScreen = ({ navigation }) => {
                         }}
                     />
 
-                    <SubmitButton text={'Sign Up'} onPress={handleSignUp} isDisabled={isDisabled} loader={loader}/>
+                    <SubmitButton text={'Sign Up'} onPress={handleSignUp} isDisabled={isDisabled} loader={loader} />
 
                     <View style={{ alignItems: 'center' }}>
                         <Text style={{ fontSize: 10, color: 'gray' }}>By signing in you agreet to our</Text>
@@ -120,7 +121,7 @@ const SignUpScreen = ({ navigation }) => {
 
             </SafeAreaView>
 
-            <SignUpMessageModal apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+            <SignUpMessageModal apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     )
 }
