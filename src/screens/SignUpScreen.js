@@ -77,7 +77,7 @@ const SignUpScreen = ({ navigation }) => {
 
                 <View style={{ alignItems: "center", marginTop: 20 }}>
                     <View style={{ height: 120, borderRadius: 10, aspectRatio: 1, alignItems: "center", justifyContent: 'center', backgroundColor: 'white', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
-                        <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1, backgroundColor: 'red' }} />
+                        <Image source={require("../images/logo_icon.jpg")} style={{ height: 100, aspectRatio: 1 }} />
                     </View>
                 </View>
 

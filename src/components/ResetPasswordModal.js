@@ -55,7 +55,7 @@ const ResetPasswordModal = ({ modalVisible, setModalVisible }) => {
                         <Text style={{ fontSize: 12, marginVertical: 20, paddingHorizontal: 30 }}>Please enter your email address to receive instructions on how to reset your password.</Text>
 
                         {apiResponse?.statusCode === 200 && <Text style={{ textAlign: 'center', color: 'green', fontSize: 18 }}>{apiResponse?.message}</Text>}
-                        {apiResponse?.statusCode === 500 && <Text style={{ textAlign: 'center', color: 'red' }}>{apiResponse?.message}</Text>}
+                        {apiResponse?.statusCode === 500 && <Text style={{ textAlign: 'center', color: '#C12721' }}>{apiResponse?.message}</Text>}
 
                         <InputCard placeholder={"You Email"} setInput={setEmail} />
 

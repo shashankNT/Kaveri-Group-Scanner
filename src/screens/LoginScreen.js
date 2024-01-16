@@ -1,8 +1,10 @@
+import axios from "axios";
 import { appTheme } from "../colors";
-import React, { useState } from "react";
 import base64 from 'react-native-base64';
+import { offers } from '../api/apiConfig';
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
+import React, { useEffect, useState } from "react";
 import SubmitButton from "../components/SubmitButton";
 import { inputCardStyles } from '../components/InputCard'
 import ResetPasswordModal from "../components/ResetPasswordModal";
@@ -16,7 +18,32 @@ const LoginScreen = ({ navigation }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loader, setLoader] = useState(false);
+
     const isDisabled = !(email && password);
+
+    const validateLoginCredentials = async (basicToken) => {
+        setLoader(true);
+        try {
+
+            const response = await axios.get(offers, { headers: { Authorization: basicToken } });
+                        
+            setLoader(false);
+            if (response?.data?.status === false) {
+                setErrorMessage(response?.data?.message);
+            } else {
+                navigation.navigate('Home');
+            }
+
+        } catch (error) {
+            
+            if (error?.response?.status === 401 || error?.response?.status === 403) {
+                setErrorMessage(error?.response?.data?.error);
+                setLoader(false);
+            }
+        }
+    }
 
     const handleLogin = async () => {
 
@@ -25,8 +52,15 @@ const LoginScreen = ({ navigation }) => {
         await AsyncStorage.setItem('basicAuth', basicAuthValue);
         await AsyncStorage.setItem('email', email);
 
-        navigation.navigate('Home');
+        validateLoginCredentials(basicAuthValue);
+
     };
+
+    useEffect(() => {
+        setLoader(false);
+        setErrorMessage('');
+    }, [email, password]);
+
 
 
     return (
@@ -51,7 +85,9 @@ const LoginScreen = ({ navigation }) => {
                     }
                 </View>
 
-                <SubmitButton text={'Sign Up'} onPress={handleLogin} isDisabled={isDisabled} />
+                <Text style={{ textAlign: 'center', color: '#C12721', paddingTop: 8 }} >{errorMessage}</Text>
+
+                <SubmitButton text={'Sign Up'} onPress={handleLogin} isDisabled={isDisabled} loader={loader} />
 
                 <Text style={styles.plainText} onPress={() => setModalVisible(!modalVisible)}> Forgot Password? </Text>
                 <Text style={styles.plainText}> Don't have an account? <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}> Sign Up </Text></Text>
