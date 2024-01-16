@@ -29,7 +29,7 @@
       "**/*"
     ],
     "ios": {
-      "buildNumber": "1",
+      "buildNumber": "3",
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Allow this app to access camera.",
@@ -37,7 +37,7 @@
       }
     },
     "android": {
-      "versionCode": 1,
+      "versionCode": 3,
       "permissions": [
         "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE",
