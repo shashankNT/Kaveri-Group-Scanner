@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { appTheme } from '../colors';
+import React, { useState } from 'react';
 import InputCard from '../components/InputCard';
 import { changePassword } from '../api/apiConfig';
-import React, { useEffect, useState } from 'react';
-import MessageModal from '../components/MessageModal'
 import BackArrowIcon from '../components/BackArrowIcon';
 import { inputCardStyles } from '../components/InputCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ChangePasswordMessageModal from '../components/ChangePasswordMessageModal';
 import { ActivityIndicator, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 
-const ChangePasswordScreen = ({ navigation }) => {
+const ChangePasswordScreen = ({ navigation, route }) => {
+    const { email } = route.params;
 
-    const [email, setEmail] = useState('');
+
     const [currentPassowrd, setCurrentPassowrd] = useState();
     const [newPassword, setNewPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
@@ -23,22 +24,6 @@ const ChangePasswordScreen = ({ navigation }) => {
     const isDisabled = !(currentPassowrd && newPassword && confirmPassword);
 
     console.log(isDisabled);
-
-    useEffect(() => {
-        const getEmailFromStorage = async () => {
-            try {
-                const storedEmail = await AsyncStorage.getItem('email');
-                if (storedEmail !== null) {
-                    setEmail(storedEmail);
-                }
-            } catch (error) {
-                console.error('Error retrieving email from AsyncStorage:', error);
-            }
-        };
-
-        getEmailFromStorage();
-    }, []);
-
 
     const handleSubmit = async () => {
         setLoader(true);
@@ -63,9 +48,18 @@ const ChangePasswordScreen = ({ navigation }) => {
             setApiResponse(response?.data);
 
         } catch (error) {
+
+            const errorMessageObj = {
+                success: false,
+                message:
+                    Array.isArray(error?.response?.data?.message)
+                        ? error?.response?.data?.message[0]
+                        : error?.response?.data?.message
+            }
+
             setLoader(false);
             setModalVisible(true);
-            setApiResponse(error?.response?.data);
+            setApiResponse(errorMessageObj);
         }
     }
 
@@ -95,10 +89,10 @@ const ChangePasswordScreen = ({ navigation }) => {
                         : <Text style={{ padding: 10, fontWeight: 400, fontSize: 16, color: "white" }}>Apply</Text>
                     }
                 </TouchableOpacity>
-                
+
 
             </SafeAreaView>
-            <MessageModal modalName={'Update'} isLogout={true} buttonText={'Log out'} apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            <ChangePasswordMessageModal apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     )
 }

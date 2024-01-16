@@ -16,13 +16,13 @@ const SignUpMessageModal = ({ apiResponse, modalVisible, setModalVisible }) => {
                         {apiResponse?.success
                             ?
                             <View style={styles.modalView}>
-                                <Text style={{ fontSize: 18 }}> Sign Up Success!'</Text>
+                                <Text style={{ fontSize: 18 }}> Sign Up Success!</Text>
                                 <Text style={{ fontSize: 12, marginTop: 20, marginBottom: 15 }}>{apiResponse?.message}</Text>
                                 <SubmitButton text='Close' onPress={() => { setModalVisible(!modalVisible); navigation.navigate('LoginScreen') }} />
                             </View>
                             :
                             <View style={styles.modalView}>
-                                <Text style={{ fontSize: 18 }}> Sign Up Failed!'</Text>
+                                <Text style={{ fontSize: 18 }}> Sign Up Failed!</Text>
                                 <Text style={{ fontSize: 12, marginTop: 20, marginBottom: 15 }}>{apiResponse?.message[0]}</Text>
                                 <SubmitButton text='Close' onPress={() => setModalVisible(!modalVisible)} />
                             </View>

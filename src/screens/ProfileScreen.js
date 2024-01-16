@@ -35,7 +35,7 @@ const ProfileScreen = ({ navigation }) => {
             <SafeAreaView style={{ backgroundColor: appTheme.backgroundColor, flex: 1 }}>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('UserInfoScreen',{ userInfo: userInfo })} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 20, marginBottom: 6, alignItems: 'center' }} >
+                <TouchableOpacity onPress={() => navigation.navigate('UserInfoScreen', { userInfo: userInfo })} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 20, marginBottom: 6, alignItems: 'center' }} >
                     <View>
                         <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{userInfo?.name}</Text>
                         <Text style={{ fontSize: 16, color: 'gray' }}>View Profile</Text>
@@ -45,8 +45,8 @@ const ProfileScreen = ({ navigation }) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigation.navigate('SettingsScreen')} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
-                    <Text style={{ fontSize: 18 }}> Settings </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('ChangePasswordScreen', { email: userInfo?.email })} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
+                    <Text style={{ fontSize: 18 }}> Change Password </Text>
                     <Ionicons name="settings-sharp" size={24} color="gray" />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { setModalVisible(!modalVisible) }} style={{ marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 15, paddingRight: 10, borderBottomWidth: 0.5, borderBottomColor: 'lightgray' }}>
