@@ -10,7 +10,7 @@ import { inputCardStyles } from '../components/InputCard'
 import React, { useContext, useEffect, useState } from "react";
 import ResetPasswordModal from "../components/ResetPasswordModal";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Image, View, StyleSheet, TextInput, Text, SafeAreaView } from "react-native";
+import { Image, View, StyleSheet, TextInput, Text, SafeAreaView, ScrollView } from "react-native";
 
 
 const LoginScreen = ({ navigation }) => {
@@ -32,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
         try {
 
             const response = await axios.get(offers, { headers: { Authorization: basicToken } });
-                        
+
             setLoader(false);
             if (response?.data?.status === false) {
                 setErrorMessage(response?.data?.message);
@@ -76,25 +76,26 @@ const LoginScreen = ({ navigation }) => {
                     </View>
                 </View>
 
-                <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 20 }} > Sign In </Text>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <Text style={{ fontSize: 20, fontWeight: "bold", textAlign: "center", margin: 20 }} > Sign In </Text>
 
-                <InputCard placeholder={'Your Email'} setInput={setEmail} />
+                    <InputCard placeholder={'Your Email'} setInput={setEmail} />
 
-                <View style={inputCardStyles.textInputContainer}>
-                    <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={(text) => setPassword(text)} secureTextEntry={!showPassword} />
-                    {showPassword
-                        ? <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye" size={24} />
-                        : <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye-off" size={24} />
-                    }
-                </View>
+                    <View style={inputCardStyles.textInputContainer}>
+                        <TextInput style={{ flex: 1, borderRadius: 60 }} placeholder="Password" selectionColor={appTheme.primaryColor} onChangeText={(text) => setPassword(text)} secureTextEntry={!showPassword} />
+                        {showPassword
+                            ? <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye" size={24} />
+                            : <Ionicons onPress={() => setShowPassword(!showPassword)} style={styles.hidePassword} name="eye-off" size={24} />
+                        }
+                    </View>
 
-                <Text style={{ textAlign: 'center', color: '#C12721', paddingTop: 8 }} >{errorMessage}</Text>
+                    <Text style={{ textAlign: 'center', color: '#C12721', paddingTop: 8 }} >{errorMessage}</Text>
 
-                <SubmitButton text={'Sign In'} onPress={handleLogin} isDisabled={isDisabled} loader={loader} />
+                    <SubmitButton text={'Sign In'} onPress={handleLogin} isDisabled={isDisabled} loader={loader} />
 
-                <Text style={styles.plainText} onPress={() => setModalVisible(!modalVisible)}> Forgot Password? </Text>
-                <Text style={styles.plainText}> Don't have an account? <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}> Sign Up </Text></Text>
-
+                    <Text style={styles.plainText} onPress={() => setModalVisible(!modalVisible)}> Forgot Password? </Text>
+                    <Text style={styles.plainText}> Don't have an account? <Text onPress={() => { navigation.navigate('SignUpScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}> Sign Up </Text></Text>
+                </ScrollView>
             </SafeAreaView>
             <ResetPasswordModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
