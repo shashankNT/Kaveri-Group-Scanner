@@ -7,7 +7,7 @@ const App = () => {
     StatusBar.setBackgroundColor(appTheme.primaryColor);
     StatusBar.setBarStyle("light-content");
     return (
-            <Stacks />
+        <Stacks />
     )
 }
 

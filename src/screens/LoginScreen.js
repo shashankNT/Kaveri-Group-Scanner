@@ -5,9 +5,9 @@ import { offers } from '../api/apiConfig';
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
 import UserContext from "../context/UserContext";
-import React, { useContext, useEffect, useState } from "react";
 import SubmitButton from "../components/SubmitButton";
 import { inputCardStyles } from '../components/InputCard'
+import React, { useContext, useEffect, useState } from "react";
 import ResetPasswordModal from "../components/ResetPasswordModal";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image, View, StyleSheet, TextInput, Text, SafeAreaView } from "react-native";

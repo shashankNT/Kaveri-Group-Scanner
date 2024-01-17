@@ -3,7 +3,7 @@ import UserContext from '../context/UserContext';
 import SubmitButton from '../components/SubmitButton';
 import React, { useContext, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ImageBackground, View, StyleSheet, Image, ActivityIndicator } from 'react-native'
+import { ImageBackground, View, StyleSheet, Image, ActivityIndicator } from 'react-native';
 
 const LandingScreen = ({ navigation }) => {
 
