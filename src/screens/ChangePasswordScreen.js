@@ -70,7 +70,7 @@ const ChangePasswordScreen = ({ navigation, route }) => {
                 <Text style={{ paddingVertical: 14, fontSize: 20, fontWeight: 'bold' }}>Change Password</Text>
                 <Text style={{ paddingBottom: 15, fontSize: 12, color: 'gray' }}>Enter your new password and confirm your password</Text>
 
-                <TextInput value={email} style={inputCardStyles.textInputContainer} editable={false} selectTextOnFocus={false} />
+                <TextInput value={email} style={[inputCardStyles.textInputContainer, {color:'#8e8e8e'}]} editable={false} selectTextOnFocus={false} />
 
                 <InputCard setInput={setCurrentPassowrd} placeholder={'Current Password'} />
                 <InputCard setInput={setNewPassword} placeholder={'New Password'} />
