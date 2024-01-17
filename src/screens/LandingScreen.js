@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { appTheme } from '../colors';
+import UserContext from '../context/UserContext';
 import SubmitButton from '../components/SubmitButton';
+import React, { useContext, useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ImageBackground, View, StyleSheet, Image, ActivityIndicator } from 'react-native'
-import { appTheme } from '../colors';
 
 const LandingScreen = ({ navigation }) => {
 
+    const { setIsLogedIn } = useContext(UserContext);
     const [loader, setLoader] = useState(true);
 
     const checkForTocken = async () => {
         const credentials = await AsyncStorage.getItem('basicAuth');
-        if (credentials !== null) navigation.navigate('Home');
+        if (credentials !== null) setIsLogedIn(true);
         else setLoader(false);
     }
 

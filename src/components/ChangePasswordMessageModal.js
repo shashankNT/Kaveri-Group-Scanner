@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react';
 import SubmitButton from './SubmitButton';
-import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
+import UserContext from '../context/UserContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from "@react-navigation/native";
+import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback } from "react-native";
 
 const ChangePasswordMessageModal = ({ apiResponse, modalVisible, setModalVisible }) => {
 
-    const navigation = useNavigation();
+    const { setIsLogedIn } = useContext(UserContext);
 
     const handleClose = async () => {
         if (apiResponse?.success) {
             await AsyncStorage.removeItem('basicAuth');
-            navigation.navigate('LoginScreen');
+            setIsLogedIn(false);
         }
         setModalVisible(!modalVisible);
     }

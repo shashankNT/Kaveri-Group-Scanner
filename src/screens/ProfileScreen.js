@@ -12,9 +12,8 @@ import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 
 const ProfileScreen = ({ navigation }) => {
 
-    const [modalVisible, setModalVisible] = useState(false);
-
     const [userInfo, setUserInfo] = useState();
+    const [modalVisible, setModalVisible] = useState(false);
 
     const getUserInfo = async () => {
         try {
@@ -57,7 +56,7 @@ const ProfileScreen = ({ navigation }) => {
                 <TabBarButton activeTab='Profile' navigation={navigation} />
 
             </SafeAreaView>
-            <LogoutWarningModal modalVisible={modalVisible} setModalVisible={setModalVisible} navigation={navigation} />
+            <LogoutWarningModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     )
 }

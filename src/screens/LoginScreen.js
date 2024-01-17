@@ -4,7 +4,8 @@ import base64 from 'react-native-base64';
 import { offers } from '../api/apiConfig';
 import { Ionicons } from "@expo/vector-icons";
 import InputCard from "../components/InputCard";
-import React, { useEffect, useState } from "react";
+import UserContext from "../context/UserContext";
+import React, { useContext, useEffect, useState } from "react";
 import SubmitButton from "../components/SubmitButton";
 import { inputCardStyles } from '../components/InputCard'
 import ResetPasswordModal from "../components/ResetPasswordModal";
@@ -13,6 +14,9 @@ import { Image, View, StyleSheet, TextInput, Text, SafeAreaView } from "react-na
 
 
 const LoginScreen = ({ navigation }) => {
+
+    const { setIsLogedIn } = useContext(UserContext);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
             if (response?.data?.status === false) {
                 setErrorMessage(response?.data?.message);
             } else {
-                navigation.navigate('Home');
+                setIsLogedIn(true);
             }
 
         } catch (error) {
