@@ -4,16 +4,8 @@ import SubmitButton from '../components/SubmitButton';
 import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
 
 const ScannerScreen = ({ navigation }) => {
-    const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const [scannedData, setScannedData] = useState({ data: null });
-
-    useEffect(() => {
-        (async () => {
-            const { status } = await BarCodeScanner.requestPermissionsAsync();
-            setHasPermission(status === 'granted');
-        })();
-    }, []);
 
     useEffect(() => {
         if (scannedData.data !== null)
@@ -25,13 +17,6 @@ const ScannerScreen = ({ navigation }) => {
         setScannedData({ type, data });
     };
 
-    if (hasPermission === null) {
-        return <Text>Requesting camera permission</Text>;
-    }
-
-    if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
-    }
 
     return (
         <SafeAreaView style={{ padding: 20, backgroundColor: 'white', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -42,7 +27,7 @@ const ScannerScreen = ({ navigation }) => {
                 />
                 <View style={{ paddingTop: 100, alignContent: 'center', justifyContent: 'space-between', width: '100%', height: '100%' }}>
                     <Text style={{ fontSize: 25, fontWeight: 400, color: 'white', textAlign: 'center' }}>Sacn a QR Code</Text>
-                    <SubmitButton text={'Cancel'} />
+                    <SubmitButton text={'Cancel'} onPress={()=>navigation.navigate('Home')}/>
                 </View>
             </View>
         </SafeAreaView>

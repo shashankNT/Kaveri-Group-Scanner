@@ -3,12 +3,12 @@ import { appTheme } from "../colors";
 import React, { useState } from "react";
 import { signUp } from '../api/apiConfig';
 import { baseUrl } from '../api/apiConfig';
+import SubmitButton from "../components/SubmitButton";
 import BackArrowIcon from "../components/BackArrowIcon";
 import { Dropdown } from 'react-native-element-dropdown';
 import SignUpMessageModal from "../components/SignUpMessageModal";
 import InputCard, { inputCardStyles } from "../components/InputCard";
 import { Image, View, Text, SafeAreaView, Linking, ScrollView, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
-import SubmitButton from "../components/SubmitButton";
 
 const SignUpScreen = ({ navigation }) => {
 
