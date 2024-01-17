@@ -28,14 +28,19 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
                 headers: { Authorization: credentials },
             });
 
-            setLotData(response?.data?.test_report_items);
+            const lotDataObj = {
+                status: true,
+                data: response?.data?.test_report_items
+            };
+
+            setLotData(lotDataObj);
             setTestReportPDF(response?.data?.test_report_summary);
             setLoader(false);
 
         } catch (error) {
             const lotDataObj = {
                 status: false,
-                message: error?.response?.data?.message,
+                data: error?.response?.data?.message,
             };
 
             setLotData(lotDataObj);
@@ -104,10 +109,8 @@ const ScannerSummaryScreen = ({ route, navigation }) => {
                         <>
                             {
                                 lotData?.status
-                                    ?
-                                    <SummaryTable lotData={lotData} />
-                                    :
-                                    <View
+                                    ? <SummaryTable lotData={lotData.data} />
+                                    : <View
                                         style={{
                                             flex: 1,
                                             alignItems: "center",
