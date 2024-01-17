@@ -41,7 +41,7 @@ const ProfileScreen = ({ navigation }) => {
                         <Text style={{ fontSize: 16, color: 'gray' }}>View Profile</Text>
                     </View>
                     <View style={{ height: 90, borderRadius: 100, alignItems: "center", justifyContent: 'center', backgroundColor: 'lightgray', shadowColor: "gray", shadowOpacity: 0.8, elevation: 8 }}>
-                        <UserAvatar size={90} textColor={appTheme.primaryColor} name="Shyam Admin" bgColor="lightgray" />
+                        <UserAvatar size={90} textColor={appTheme.primaryColor} name={userInfo?.name} bgColor="lightgray" />
                     </View>
                 </TouchableOpacity>
 
