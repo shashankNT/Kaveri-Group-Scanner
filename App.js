@@ -1,13 +1,19 @@
 import Stacks from './src/components/Stacks';
-import { StatusBar } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, View } from 'react-native';
 import { appTheme } from './src/colors';
 
 
 const App = () => {
-    StatusBar.setBackgroundColor(appTheme.primaryColor);
-    StatusBar.setBarStyle("light-content");
+    if (Platform.OS === "android") {
+        StatusBar.setBackgroundColor(appTheme.backgroundColor); //this works just for android
+      }
+      StatusBar.setBarStyle("dark-content");
     return (
+        <View style={{ height: "100%", backgroundColor: appTheme.backgroundColor }}>
+        <SafeAreaView style={{flex: 1}}>
         <Stacks />
+        </SafeAreaView>
+        </View>
     )
 }
 

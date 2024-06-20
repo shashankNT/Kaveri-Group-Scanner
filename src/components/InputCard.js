@@ -27,9 +27,9 @@ export const inputCardStyles = StyleSheet.create({
         flexDirection: "row",
         paddingLeft: 20,
         marginVertical: 8,
-        borderRadius: 50,
+        borderRadius: 10,
         shadowColor: "gray",
-        shadowOpacity: 0.8,
+        // shadowOpacity: 0.8,
         elevation: 5,
     },
 });

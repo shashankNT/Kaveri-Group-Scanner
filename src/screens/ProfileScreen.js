@@ -53,7 +53,7 @@ const ProfileScreen = ({ navigation }) => {
                     <Fontisto name="power" size={24} color="gray" />
                 </TouchableOpacity>
 
-                <TabBarButton activeTab='Profile' navigation={navigation} />
+                {/* <TabBarButton activeTab='Profile' navigation={navigation} /> */}
 
             </SafeAreaView>
             <LogoutWarningModal modalVisible={modalVisible} setModalVisible={setModalVisible} />

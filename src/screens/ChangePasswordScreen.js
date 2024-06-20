@@ -7,7 +7,7 @@ import BackArrowIcon from '../components/BackArrowIcon';
 import { inputCardStyles } from '../components/InputCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ChangePasswordMessageModal from '../components/ChangePasswordMessageModal';
-import { ActivityIndicator, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const ChangePasswordScreen = ({ navigation, route }) => {
     const { email } = route.params;
@@ -63,8 +63,9 @@ const ChangePasswordScreen = ({ navigation, route }) => {
 
     return (
         <>
-            <SafeAreaView style={{ padding: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
+                <View style={{padding: 20, backgroundColor: appTheme.backgroundColor, flex: 1 }}>
 
+          
                 <BackArrowIcon navigation={navigation} />
 
                 <Text style={{ paddingVertical: 14, fontSize: 20, fontWeight: 'bold' }}>Change Password</Text>
@@ -88,8 +89,7 @@ const ChangePasswordScreen = ({ navigation, route }) => {
                     }
                 </TouchableOpacity>
 
-
-            </SafeAreaView>
+                </View>
             <ChangePasswordMessageModal apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     )
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
         backgroundColor: appTheme.primaryColor,
 
         shadowColor: "black",
-        shadowOpacity: 0.8,
+        // shadowOpacity: 0.8,
         elevation: 8,
     },
 });

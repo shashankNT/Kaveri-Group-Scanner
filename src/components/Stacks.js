@@ -13,6 +13,7 @@ import ChangePasswordScreen from '../screens/ChangePasswordScreen';
 import ScannerSummaryScreen from '../screens/ScannerSummaryScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {BottomNavigator} from '../screens/BottomNavigator';
 
 const Stack = () => {
 
@@ -21,9 +22,14 @@ const Stack = () => {
     const [isLogedIn, setIsLogedIn] = useState(false);
 
     const checkAuthToken = async () => {
-        const token = await AsyncStorage.getItem('basicAuth');
-        if (token) setIsLogedIn(true);
-    }
+        try {
+            const token = await AsyncStorage.getItem('basicAuth');
+            if (token) setIsLogedIn(true);
+        } catch (error) {
+            console.error('Failed to check auth token:', error);
+        }
+    };
+
 
     useEffect(() => {
         checkAuthToken();
@@ -42,9 +48,11 @@ const Stack = () => {
                     </Stack.Navigator>
                     :
                     <Stack.Navigator>
-                        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+                        {/* <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="Offers" component={OffersScreen} options={{ title: "Today's Offer", headerTitleAlign: 'center' }} />
-                        <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+                        <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} /> */}
+
+                        <Stack.Screen name="BottomNavigator" component={BottomNavigator} options={{ headerShown: false }} />
 
                         <Stack.Screen name="ScannerScreen" component={ScannerScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="UserInfoScreen" component={UserInfoScreen} options={{ headerShown: false }} />

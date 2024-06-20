@@ -9,9 +9,15 @@ const LogoutWarningModal = ({ modalVisible, setModalVisible }) => {
     const { setIsLogedIn } = useContext(UserContext);
 
     const handleLogOut = async () => {
-        await AsyncStorage.removeItem('basicAuth');
-        setIsLogedIn(false);
-    }
+        try {
+            await AsyncStorage.removeItem('basicAuth');
+            setIsLogedIn(false);
+            setModalVisible(false);
+        } catch (error) {
+            console.error('Failed to log out:', error);
+        }
+    };
+
 
     return (
         <>

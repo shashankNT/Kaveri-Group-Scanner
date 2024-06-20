@@ -42,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
 
             </View>
 
-            <TabBarButton activeTab='Home' navigation={navigation} />
+            {/* <TabBarButton activeTab='Home' navigation={navigation} /> */}
         </SafeAreaView>
     )
 }

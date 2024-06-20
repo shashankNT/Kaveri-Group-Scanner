@@ -26,7 +26,7 @@ const OffersScreen = ({ navigation }) => {
                 </View>
             </ScrollView>
 
-            <TabBarButton activeTab='Offers' navigation={navigation} />
+            {/* <TabBarButton activeTab='Offers' navigation={navigation} /> */}
         </SafeAreaView >
     )
 }

@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         backgroundColor: appTheme.primaryColor,
 
         shadowColor: "black",
-        shadowOpacity: 0.8,
+        // shadowOpacity: 0.8,
         elevation: 8,
     },
 
