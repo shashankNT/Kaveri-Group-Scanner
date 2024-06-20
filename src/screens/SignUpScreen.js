@@ -3,12 +3,12 @@ import { appTheme } from "../colors";
 import React, { useState } from "react";
 import { signUp } from '../api/apiConfig';
 import { baseUrl } from '../api/apiConfig';
+import SubmitButton from "../components/SubmitButton";
 import BackArrowIcon from "../components/BackArrowIcon";
 import { Dropdown } from 'react-native-element-dropdown';
 import SignUpMessageModal from "../components/SignUpMessageModal";
 import InputCard, { inputCardStyles } from "../components/InputCard";
 import { Image, View, Text, SafeAreaView, Linking, ScrollView, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
-import SubmitButton from "../components/SubmitButton";
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -94,6 +94,7 @@ const SignUpScreen = ({ navigation }) => {
                         keyboardType='numeric'
                         setInput={setPhoneNumber}
                         selectionColor={appTheme.primaryColor}
+                        maxLength={10}
                         onChangeText={(text) => setPhoneNumber(text)}
                     />
                     <Dropdown
@@ -108,19 +109,19 @@ const SignUpScreen = ({ navigation }) => {
                         }}
                     />
 
-                    <SubmitButton text={'Sign Up'} onPress={handleSignUp} isDisabled={isDisabled} loader={loader}/>
+                    <SubmitButton text={'Sign Up'} onPress={handleSignUp} isDisabled={isDisabled} loader={loader} />
 
                     <View style={{ alignItems: 'center' }}>
                         <Text style={{ fontSize: 10, color: 'gray' }}>By signing in you agreet to our</Text>
                         <Text onPress={handlePolicy} style={{ fontSize: 10, color: 'gray', textDecorationLine: 'underline' }}>Terms & Privacy Policy.</Text>
                     </View>
 
-                    <Text style={{ textAlign: 'center', color: 'gray', marginVertical: 25 }}> Already have account?. <Text onPress={() => { navigation.navigate('LoginScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign In</Text> </Text>
+                    <Text style={{ textAlign: 'center', color: 'gray', marginVertical: 25 }}> Already have account? <Text onPress={() => { navigation.navigate('LoginScreen') }} style={{ color: appTheme.primaryColor, fontWeight: 600 }}>Sign In</Text> </Text>
                 </ScrollView>
 
             </SafeAreaView>
 
-            <SignUpMessageModal apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+            <SignUpMessageModal apiResponse={apiResponse} modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </>
     )
 }

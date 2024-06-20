@@ -1,13 +1,16 @@
-import React from 'react'
 import { appTheme } from "../colors";
+import React, { useContext } from 'react';
+import UserContext from '../context/UserContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, StyleSheet, Text, SafeAreaView, Modal, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 
-const LogoutWarningModal = ({ modalVisible, setModalVisible, navigation }) => {
+const LogoutWarningModal = ({ modalVisible, setModalVisible }) => {
+
+    const { setIsLogedIn } = useContext(UserContext);
 
     const handleLogOut = async () => {
         await AsyncStorage.removeItem('basicAuth');
-        navigation.navigate('LoginScreen');
+        setIsLogedIn(false);
     }
 
     return (

@@ -6,10 +6,11 @@ const InputCard = ({ placeholder, setInput }) => {
     return (
         <>
             <TextInput
-                style={inputCardStyles.textInputContainer}
+                autoCapitalize='none'
                 placeholder={placeholder}
                 selectionColor={appTheme.primaryColor}
                 onChangeText={(text) => setInput(text)}
+                style={inputCardStyles.textInputContainer}
             />
         </>
     )
