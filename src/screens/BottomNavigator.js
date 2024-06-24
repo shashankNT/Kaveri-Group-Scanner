@@ -4,6 +4,7 @@ import ProfileScreen from "./ProfileScreen";
 import OffersScreen from "./OffersScreen";
 import { MaterialIcons, Entypo, FontAwesome } from '@expo/vector-icons';
 import { Icon } from "react-native-paper";
+import { Ionicons } from '@expo/vector-icons';
 
 import {
   Dimensions,
@@ -16,6 +17,7 @@ import {
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { appTheme } from "../colors";
+import ChatScreen from "./ChatScreen";
 
 export function BottomNavigator() {
   const Tab = createBottomTabNavigator();
@@ -85,6 +87,16 @@ export function BottomNavigator() {
             ),
           }}
           component={ProfileScreen}
+        />
+         <Tab.Screen
+          name="Chat"
+          options={{
+            tabBarLabel: "Chat",
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="chatbubble-ellipses-sharp" size={24} color={color} />
+            ),
+          }}
+          component={ChatScreen}d
         />
       </Tab.Navigator>
     // </SafeAreaView>
