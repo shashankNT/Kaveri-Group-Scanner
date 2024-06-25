@@ -365,12 +365,20 @@ const ChatScreen = () => {
     }
   };
 
+  const Header = () => (
+    <View style={styles.headerContainer}>
+      <Image source={require("../images/logo_icon.jpg")} style={styles.logo} />
+      <Text style={styles.headerTitle}>Kaveri Exports</Text>
+    </View>
+  );
+
   const currentStepData = jobSteps.find((step) => step.id === currentStep);
   const inputType = currentStepData?.fields[0]?.inputType || "default";
   // console.log(currentStepData);
   const tabbarHeight = useBottomTabBarHeight();
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
+      <Header />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -617,6 +625,24 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 5,
   },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: appTheme.backgroundColor,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: "#ccc",
+  },
+  logo: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  headerTitle: {
+    fontSize: height * 0.023,
+    fontWeight: "bold",
+  },
 });
 
 export default ChatScreen;
@@ -635,5 +661,5 @@ export default ChatScreen;
 // send button to icon and disable send when input is null -> done
 // check keyboard hinderence if any -> done
 // frontend validation for type of text entered -> done
-// add header with ks avatar
+// add header with ks avatar -> done
 //disable upload -> done
