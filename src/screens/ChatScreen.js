@@ -19,8 +19,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 const { height, width } = Dimensions.get("window");
 import { ActivityIndicator } from "react-native-paper";
-import * as ImagePicker from 'expo-image-picker';
-
+import * as ImagePicker from "expo-image-picker";
 
 const jobData = [
   {
@@ -90,14 +89,14 @@ const jobData = [
     type: "question",
     title: "Enter Trash",
     fields: [{ label: "Trash", inputType: "number", key: "trash" }],
-    actions: [{ label: "Next", nextStep: '8' }],
+    actions: [{ label: "Next", nextStep: "8" }],
   },
   {
-    id: '8',
-    type: 'imageUpload',
-    title: 'Upload Image',
+    id: "8",
+    type: "imageUpload",
+    title: "Upload Image",
     fields: [],
-    actions: [{ label: 'Next', nextStep: null }]
+    actions: [{ label: "Next", nextStep: null }],
   },
   {
     id: "9",
@@ -117,6 +116,7 @@ const ChatScreen = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [loader, showLoader] = useState(false);
   const [image, setImage] = useState(null);
+  const [uploadDisabledSteps, setUploadDisabledSteps] = useState({});
 
   const flatlistRef = useRef(null);
 
@@ -126,7 +126,7 @@ const ChatScreen = () => {
     }
   }, [messages]);
 
-  const pickImage = async () => {
+  const pickImage = async (stepId) => {
     const step = jobSteps.find((step) => step.id === currentStep);
     const currentField = step.fields[0];
 
@@ -146,31 +146,36 @@ const ChatScreen = () => {
 
       const updatedResponses = [
         ...responses,
-        { key: 'image', value: imageUri },
+        { key: "image", value: imageUri },
       ];
-  
-      setResponses(updatedResponses); 
+
+      setResponses(updatedResponses);
 
       setMessages((prevMessages) => [
         ...prevMessages,
         step,
-        { type: "image", uri : imageUri },
+        { type: "image", uri: imageUri },
       ]);
+
+      setUploadDisabledSteps((prev) => ({
+        ...prev,
+        [stepId]: true,
+      }));
 
       const nextStep = step.actions[0].nextStep;
 
-    // console.log(`STEP: ${JSON.stringify(step)}, CURRENTFIELD: ${JSON.stringify(currentField)}, UPDATEDRES: ${JSON.stringify(updatedResponses)}, NEXTSTEP: ${nextStep}`);
-    console.log(nextStep);
-    if (nextStep) {
-      setCurrentStep(nextStep);
-    } else {
-      setCurrentStep(null);
-      console.log("All responses:", updatedResponses);
-      setMessages((prevMsgs) => [
-        ...prevMsgs,
-        { type: "completed", text: "Completed" },
-      ]);
-    }
+      // console.log(`STEP: ${JSON.stringify(step)}, CURRENTFIELD: ${JSON.stringify(currentField)}, UPDATEDRES: ${JSON.stringify(updatedResponses)}, NEXTSTEP: ${nextStep}`);
+      console.log(nextStep);
+      if (nextStep) {
+        setCurrentStep(nextStep);
+      } else {
+        setCurrentStep(null);
+        console.log("All responses:", updatedResponses);
+        setMessages((prevMsgs) => [
+          ...prevMsgs,
+          { type: "completed", text: "Completed" },
+        ]);
+      }
     }
   };
 
@@ -182,6 +187,7 @@ const ChatScreen = () => {
     setMessages([]);
     setSelectedOptions({});
     setInputValue("");
+    setUploadDisabledSteps({});
   };
 
   const clearScreen = () => {
@@ -190,7 +196,8 @@ const ChatScreen = () => {
     setMessages([]);
     setSelectedOptions({});
     setInputValue("");
-    setJobSteps([])
+    setJobSteps([]);
+    setUploadDisabledSteps({});
   };
 
   const handleSubmit = () => {
@@ -318,10 +325,17 @@ const ChatScreen = () => {
         return (
           <View style={styles.messageContainer}>
             <Text style={styles.title}>{step.title}</Text>
-            <Button
-              title="Upload"
-              onPress={pickImage}
-            />
+            <TouchableOpacity
+              onPress={() => pickImage(step.id)}
+              style={
+                uploadDisabledSteps[step.id]
+                  ? styles.actionButtonDisabled
+                  : styles.actionButton
+              }
+              disabled={uploadDisabledSteps[step.id]}
+            >
+              <Text style={styles.buttonText}>Upload</Text>
+            </TouchableOpacity>
           </View>
         );
       case "completed":
@@ -369,19 +383,22 @@ const ChatScreen = () => {
                 ref={flatlistRef}
                 data={[...messages, currentStepData]}
                 renderItem={({ item }) => {
-                  if(item){
+                  if (item) {
                     if (item.type === "user") {
                       return (
                         <View style={styles.userMessageContainer}>
                           <Text style={styles.userMessage}>{item.text}</Text>
                         </View>
                       );
-                    }else if(item.type === 'image'){
-                      return(
-                        <View style={styles.userMessageContainer}> 
-                          <Image source={{uri: item.uri}} style={styles.uploadedImage} />
+                    } else if (item.type === "image") {
+                      return (
+                        <View style={styles.userMessageContainer}>
+                          <Image
+                            source={{ uri: item.uri }}
+                            style={styles.uploadedImage}
+                          />
                         </View>
-                      )
+                      );
                     }
                     return renderStep(item);
                   }
@@ -481,8 +498,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignSelf: "flex-start",
     maxWidth: "80%",
-    borderColor: appTheme.primaryColor,
-    borderWidth: 1
   },
   userMessageContainer: {
     backgroundColor: "#dcf8c6",
@@ -600,8 +615,8 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 10,
-    marginVertical: 5
-  }
+    marginVertical: 5,
+  },
 });
 
 export default ChatScreen;
@@ -613,12 +628,12 @@ export default ChatScreen;
 // make it look like chat ChatScreen -> done
 // option to reset and submit -> done
 // improve button ui -> done
-// image upload functionality
+// image upload functionality -> done
 // auto scroll (smoothly) to latest message -> done
-// when no question show a placeholder
+// when no question show a placeholder -> done
 // input placeholder to be a question -> done
 // send button to icon and disable send when input is null -> done
 // check keyboard hinderence if any -> done
-// frontend validation for type of text entered
+// frontend validation for type of text entered -> done
 // add header with ks avatar
-//disable upload
+//disable upload -> done
