@@ -13,11 +13,14 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Dimensions,
+  Image,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 const { height, width } = Dimensions.get("window");
 import { ActivityIndicator } from "react-native-paper";
+import * as ImagePicker from 'expo-image-picker';
+
 
 const jobData = [
   {
@@ -87,15 +90,15 @@ const jobData = [
     type: "question",
     title: "Enter Trash",
     fields: [{ label: "Trash", inputType: "number", key: "trash" }],
-    actions: [{ label: "Next", nextStep: "9" }],
+    actions: [{ label: "Next", nextStep: '8' }],
   },
-  // {
-  //   id: '8',
-  //   type: 'imageUpload',
-  //   title: 'Upload Images',
-  //   fields: [],
-  //   actions: [{ label: 'Upload', nextStep: null }]
-  // },
+  {
+    id: '8',
+    type: 'imageUpload',
+    title: 'Upload Image',
+    fields: [],
+    actions: [{ label: 'Next', nextStep: null }]
+  },
   {
     id: "9",
     type: "completed",
@@ -113,6 +116,7 @@ const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [loader, showLoader] = useState(false);
+  const [image, setImage] = useState(null);
 
   const flatlistRef = useRef(null);
 
@@ -121,6 +125,56 @@ const ChatScreen = () => {
       flatlistRef.current.scrollToEnd({ animated: true });
     }
   }, [messages]);
+
+  const pickImage = async () => {
+    const step = jobSteps.find((step) => step.id === currentStep);
+    const currentField = step.fields[0];
+
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      const imageUri = result.assets[0].uri;
+      setImage(imageUri);
+
+      const updatedResponses = [
+        ...responses,
+        { key: 'image', value: imageUri },
+      ];
+  
+      setResponses(updatedResponses); 
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        step,
+        { type: "image", uri : imageUri },
+      ]);
+
+      const nextStep = step.actions[0].nextStep;
+
+    // console.log(`STEP: ${JSON.stringify(step)}, CURRENTFIELD: ${JSON.stringify(currentField)}, UPDATEDRES: ${JSON.stringify(updatedResponses)}, NEXTSTEP: ${nextStep}`);
+    console.log(nextStep);
+    if (nextStep) {
+      setCurrentStep(nextStep);
+    } else {
+      setCurrentStep(null);
+      console.log("All responses:", updatedResponses);
+      setMessages((prevMsgs) => [
+        ...prevMsgs,
+        { type: "completed", text: "Completed" },
+      ]);
+    }
+    }
+  };
+
+  // console.log(messages);
 
   const handleReset = () => {
     setCurrentStep("1");
@@ -136,6 +190,7 @@ const ChatScreen = () => {
     setMessages([]);
     setSelectedOptions({});
     setInputValue("");
+    setJobSteps([])
   };
 
   const handleSubmit = () => {
@@ -210,6 +265,7 @@ const ChatScreen = () => {
     if (nextStep) {
       setCurrentStep(nextStep);
     } else {
+      setCurrentStep(null);
       console.log("All responses:", updatedResponses);
       setMessages((prevMsgs) => [
         ...prevMsgs,
@@ -264,7 +320,7 @@ const ChatScreen = () => {
             <Text style={styles.title}>{step.title}</Text>
             <Button
               title="Upload"
-              onPress={() => console.log("Upload image")}
+              onPress={pickImage}
             />
           </View>
         );
@@ -307,20 +363,28 @@ const ChatScreen = () => {
         keyboardVerticalOffset={Platform.OS === "ios" ? tabbarHeight : 0}
       >
         {!loader ? (
-          currentStepData ? (
+          jobSteps?.length ? (
             <View style={styles.container}>
               <FlatList
                 ref={flatlistRef}
                 data={[...messages, currentStepData]}
                 renderItem={({ item }) => {
-                  if (item.type === "user") {
-                    return (
-                      <View style={styles.userMessageContainer}>
-                        <Text style={styles.userMessage}>{item.text}</Text>
-                      </View>
-                    );
+                  if(item){
+                    if (item.type === "user") {
+                      return (
+                        <View style={styles.userMessageContainer}>
+                          <Text style={styles.userMessage}>{item.text}</Text>
+                        </View>
+                      );
+                    }else if(item.type === 'image'){
+                      return(
+                        <View style={styles.userMessageContainer}> 
+                          <Image source={{uri: item.uri}} style={styles.uploadedImage} />
+                        </View>
+                      )
+                    }
+                    return renderStep(item);
                   }
-                  return renderStep(item);
                 }}
                 keyExtractor={(item, index) => index.toString()}
                 contentContainerStyle={styles.chatContainer}
@@ -417,10 +481,12 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignSelf: "flex-start",
     maxWidth: "80%",
+    borderColor: appTheme.primaryColor,
+    borderWidth: 1
   },
   userMessageContainer: {
     backgroundColor: "#dcf8c6",
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     marginVertical: 5,
     alignSelf: "flex-end",
@@ -530,6 +596,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: appTheme.disabled,
   },
+  uploadedImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 10,
+    marginVertical: 5
+  }
 });
 
 export default ChatScreen;
@@ -549,3 +621,4 @@ export default ChatScreen;
 // check keyboard hinderence if any -> done
 // frontend validation for type of text entered
 // add header with ks avatar
+//disable upload
