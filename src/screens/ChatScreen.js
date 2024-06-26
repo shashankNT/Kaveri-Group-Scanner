@@ -463,7 +463,7 @@ const ChatScreen = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: appTheme.backgroundColor,
+                backgroundColor: "#dbc9c5",
               }}
             >
               {/* <ActivityIndicator animating={true} color={appTheme.primaryColor} /> */}

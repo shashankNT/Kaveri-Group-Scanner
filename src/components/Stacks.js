@@ -14,32 +14,49 @@ import ScannerSummaryScreen from '../screens/ScannerSummaryScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {BottomNavigator} from '../screens/BottomNavigator';
+import { ActivityIndicator } from 'react-native-paper';
+import { View } from 'react-native';
+import { appTheme } from '../colors';
 
 const Stack = () => {
 
     const Stack = createNativeStackNavigator();
 
     const [isLogedIn, setIsLogedIn] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     const checkAuthToken = async () => {
+        setLoading(true);
         try {
             const token = await AsyncStorage.getItem('basicAuth');
             if (token) setIsLogedIn(true);
+            setLoading(false);
         } catch (error) {
             console.error('Failed to check auth token:', error);
+            setLoading(false);
         }
     };
 
 
     useEffect(() => {
         checkAuthToken();
-
     }, [isLogedIn]);
 
     return (
         <UserContext.Provider value={{ isLogedIn, setIsLogedIn }}>
             <NavigationContainer>
-                {!isLogedIn
+                {loading ? 
+                 <View
+                 style={{
+                   flex: 1,
+                   display: "flex",
+                   justifyContent: "center",
+                   alignItems: "center",
+                 }}
+               >
+                 <ActivityIndicator animating={true} color={appTheme.primaryColor} />
+               </View>
+                :
+                !isLogedIn
                     ?
                     <Stack.Navigator>
                         <Stack.Screen name="LandingScreen" component={LandingScreen} options={{ headerShown: false }} />
